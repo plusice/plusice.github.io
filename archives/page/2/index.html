@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>plusice</title>
+  <title>Archives | plusice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="plusice">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
 <meta property="og:site_name" content="plusice">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="plusice">
@@ -139,742 +139,76 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-2017-03-27-weex" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2015/08/15/2016-01-28-left-gulp-grunt-for-npm/" class="archive-article-date">
+  	<time datetime="2015-08-15T12:06:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-15</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/27/2017-03-27-weex/">Weex开发环境搭建与集成到已有应用</a>
+      <a class="archive-article-title" href="/2015/08/15/2016-01-28-left-gulp-grunt-for-npm/">［译］为什么我弃用gulp和grunt而用npm</a>
     </h1>
   
 
-        
-        <a href="/2017/03/27/2017-03-27-weex/" class="archive-article-date">
-  	<time datetime="2017-03-27T11:48:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>虽然我本来是很排斥这种试用了某个技术然后就写一篇博客的行为，但无奈这次试用weex的过程中确实遇到了挺多问题，所以在此记录下来，或许可以帮到一些人。weex的文档其实已经做的挺不错了，所以很多内容都可以参考文档（可能是文档频繁的完善更新，地址都换了几次了）。</p>
-<h3 id="1-什么是Weex"><a href="#1-什么是Weex" class="headerlink" title="1.什么是Weex"></a>1.什么是Weex</h3><p>很多人都应该知道了weex是个什么东西，但语文老师教导我们写好一篇作文最基本的要有一个好的结构，所以还是废话几句介绍一下，而且还可以凑一下作文字数。</p>
-<p>从<a href="https://weex.incubator.apache.org/cn/" target="_blank" rel="external">官网</a>我们可以知道：</p>
-<blockquote>
-<p>weex是一套构建高性能、可扩展的原生应用跨平台开发方案。与 Web App、HTML5 App 或 hybrid App 不同，您可以使用 Weex 构建一个真正的原生应用。更贴心的是你的代码只需使用 HTML、CSS、JavaScript 可以构建原生应用，上手非常简单。但实际上，应用的底层是 Objective-C 或 Java， 同时，Weex 提供很多 native 组件或模块供开发人员使用。</p>
-</blockquote>
-<p>它的原理文档也有<a href="https://weex.incubator.apache.org/cn/guide/intro/how-it-works.html" target="_blank" rel="external">介绍</a>，简单来说就是WeexSDK使用一个javascript引擎执行你的前端代码（JSBundle），然后再通过JSBridge与native端进行交互，进行native的渲染等操作。</p>
-<h3 id="2-搭建开发环境"><a href="#2-搭建开发环境" class="headerlink" title="2.搭建开发环境"></a>2.搭建开发环境</h3><p>开发环境的搭建还是比较简单的，如果想先看到weex实现的demo，可以先来一个<a href="http://dotwe.org/vue/4d5a0471ece3daabd4681bc6d703c4c1" target="_blank" rel="external">Hello World</a>，你可以使用vue在线编辑，实现你想实现的功能，然后给手机安装<a href="https://alibaba.github.io/weex/download.html" target="_blank" rel="external">Playground App</a>（App Store也有），用Playground扫码体验一下native流畅的原生体验。</p>
-<p>开发环境的搭建只要参考文档相信就可以顺利完成（就是装Node.js和weex-toolkit），不过这里有个小坑要注意，就是Node.js的版本不能过低，不然后面构建项目会出错，如果不知道是否过低就把版本设置到文档使用的版本以上吧（可以使用nvm）。</p>
-<p>安装完weex后，终端执行<code>weex init dir</code>命令在dir目录中就创建了一个使用 Weex 和 Vue 的模板项目。项目中已经为我们配置好了几个npm script，运行<code>npm run dev</code> 和 <code>npm run serve</code>在浏览器上进入<code>http://localhost:8080/index.html</code>就可以看到 weex h5 页面。页面附带一个二维码，我们可以通过Playground扫码再次体验一下native流畅的原生体验。不过注意手机必须和开启服务的电脑在同一局域网。</p>
-<p>至此我们已经把开发环境搭建好了，然后我们该考虑怎么把weex集成到我们的native应用中了。身为一个没有ios开发经验的小前端，这步让我走得略为艰难，虽然其实它很简单。</p>
-<h3 id="3-Cocoapods集成到已有应用"><a href="#3-Cocoapods集成到已有应用" class="headerlink" title="3.Cocoapods集成到已有应用"></a>3.Cocoapods集成到已有应用</h3><p>这里就以ios为例。</p>
-<p>集成到已有应用，首先我们得有一个应用，而有一个应用我们先得有一个xcode，机智的我已经实现发现了我的xcode版本过低，所以某晚睡觉前我对他进行更新，然而第二天起床我发现更新按钮旁边的小菊花竟然还在转动。排除了被墙并且尝试手动下载更新安装失败后，我意识到我的macOS版本是不是太低了！某天更新完系统后果然顺利完成了xcode更新。</p>
-<p>作为一个懒人在开发过程中安装依赖肯定是通过工具来完成，所以我不打算源码集成而是用Cocoapods来安装依赖的WeexSDK，然而Cocoapods当即安装失败。。查了原因是ruby版本过低(2.2.2以上)，然而使用rvm更新ruby也是失败<code>Failed to update Homebrew</code>，排查后才发现是gcc问题引起的，最终<code>brew install homebrew/dupes/apple-gcc42</code>才更新成功。不过我是在更新xcode前更新ruby失败的，所以使用新xcode的gcc可能不会有这个问题。</p>
-<p>一切终于都装好了，照着文档的介绍，我新建了一个xcode项目，新建了一个Podfile，并且写好内容（记得要更改里面的target，一个项目可以有多个target，代表要构建的多个产品），成功貌似就在眼前了！然而后面多次<code>pod install</code>的从巨慢到失败，让我再次扑街。忍无可忍把Cocoapods的源换成国内的源（<a href="http://www.jianshu.com/p/b3d15c9bbf2b" target="_blank" rel="external">参考链接</a>），却发现国内源的WeexSDK版本过低。。。这是坑爹啊！没办法我终于决定还是使用源码集成吧。</p>
-<h3 id="4-源码集成到已有应用"><a href="#4-源码集成到已有应用" class="headerlink" title="4.源码集成到已有应用"></a>4.源码集成到已有应用</h3><p>源码集成这一步倒是比较顺利了（<a href="https://open.taobao.com/doc2/detail?spm=a219a.7629140.0.0.tFddsV&amp;&amp;docType=1&amp;articleId=104829" target="_blank" rel="external">参考链接</a>），从<a href="https://github.com/alibaba/weex" target="_blank" rel="external">这里</a>把weex代码clone下来，然后切换到最新的tag（目前是v0.10.0），然后用xcode打开项目，编译后可以看到<code>weex/ios/sdk/Products</code>目录下生成了<code>WeexSDK.framework</code>的包。</p>
-<p>参考下图，将所需要的包添加进依赖（WeexSDK.framework拖进去就可以了，其他一些是系统自带的）。</p>
-<p><img src="/images/weex-xcode.png" alt="图片"></p>
-<p>我们新建的项目还需要一些代码才可以把sdk集成进去，可以使用官方提供的一个<a href="http://gw.alicdn.com/bao/uploaded/LB1yfvtKpXXXXXbXXXXXXXXXXXX.zip?spm=a219a.7629140.0.0.o5cbXU&amp;file=LB1yfvtKpXXXXXbXXXXXXXXXXXX.zip" target="_blank" rel="external">例子</a>，然后参考文档将例子代码拷贝过去。似乎我们可以跑起来了！</p>
-<p>但这里我又发现一个坑，明明我已经将WeexSDK.framework包添加进项目以来，代码还是提示没有找到包里面的相关文件。我灵机一动，是不是必须把WeexSDK.framework放在项目目录下才可以呢？于是把WeexSDK.framework拷贝到项目目录下再添加依赖，最终运行成功:</p>
-<p><img style="width: 50%" src="/images/weex-xcode2.png"></p>
-<p>按照官方提供的例子，weex构建的JSBundle是在ViewController.m文件中引进的，就是项目目录下的hello.js(参照下图)。我们用<code>weex-toolkit</code>初始化的项目build出来的代码（用weex构建的，不是vue构建的），替换掉hello.js的代码看看效果吧！</p>
-<p><img src="/images/weex-xcode3.png" alt="图片"></p>
-<p>再说说xcode的framework依赖问题，我发现原来把项目目录外的framework添加进来，xcode不会自动添加framework search path，这时需要手动添加，添加完search path后xcode即可获取到包的目录位置拿到依赖。</p>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/27/2017-03-27-weex/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-
-
-
   
-    <article id="post-2016-10-11-mock-data" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
     
-      <header class="article-header">
-        
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2015/08/15/2016-11-17-python-for-javascript-developer/" class="archive-article-date">
+  	<time datetime="2015-08-15T12:06:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-15</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/11/2016-10-11-mock-data/">前端开发中如何优雅地模拟数据</a>
+      <a class="archive-article-title" href="/2015/08/15/2016-11-17-python-for-javascript-developer/">［译］给Javascript开发者的Python指南</a>
     </h1>
   
 
-        
-        <a href="/2016/10/11/2016-10-11-mock-data/" class="archive-article-date">
-  	<time datetime="2016-10-11T15:25:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前端发展至今，开发中基本上都是和后端分离的，与后端无关的功能我们可以自己开发，但涉及到与后端数据交互相关的功能，没有了后端的配合，我们就需要自己动手了。这里就主要介绍几种我工作中使用到的方法，用来模拟后端返回的数据。</p>
-<h3 id="1-代理工具"><a href="#1-代理工具" class="headerlink" title="1.代理工具"></a>1.代理工具</h3><p>使用一些代理工具，我们可以将浏览器的请求拦截并返回其他内容。通常的做法是将请求映射到本地文件，返回请求时返回文件内容，例如配置 test.com/ 映射到本地目录 /test/ ，实现接口 test.com/req 返回文件 /test/req 的内容。各系统都有相应的工具：</p>
-<ul>
-<li>fiddler＋willow，for windows</li>
-<li>charles/wireshark，for mac/linux</li>
-</ul>
-<p>这里以charles为例介绍一下其用法，其实很简单，打开tools =&gt; Map Local，然后按下图这样配置好映射就可以了：</p>
-<p><img src="/images/mock-data-1.png" alt="图片"></p>
-<p>上面的配置是直接映射到某个文件，也可以配置 test/* 映射到本地 /test/目录，这样会根据后面的具体路径去本地寻找映射文件。但是我们还需要重置返回的http编码头域，不然可能会出现乱码，打开tools=&gt;rewrite，按照下图配置即可：</p>
-<p><img src="/images/mock-data-2.png" alt="图片"></p>
-<h3 id="2-Mockjs"><a href="#2-Mockjs" class="headerlink" title="2.Mockjs"></a>2.Mockjs</h3><p>虽然用代理工具模拟数据很方便，但模拟的数据写起来好像有点麻烦，如果我们要模拟一个100条数据的返回，用复制粘贴还要敲多好几次键盘，而且数据都是写死的无法改变。有没有更优雅的方法呢？这时候我们就可以用上另外一个工具Mockjs了。</p>
-<p>Mockjs是一个通过覆盖和模拟原生XMLHttpRequest,拦截ajax请求，返回模拟数据的前端库。它通过随机数据，模拟各种场景，支持生成随机的文本、数字、布尔值、日期、邮箱、链接、图片、颜色等。具体介绍可以看官网：<a href="http://mockjs.com/" target="_blank" rel="external">点击跳转</a></p>
-<p>它的使用也非常简单，引入库文件后我们可以像下面这么写，拦截所有.json结尾的get请求，并返回json数据{“data”:”test”}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Mock.mock(/\.json/, &apos;get&apos;, function(options) &#123;</div><div class="line">	return Mock.mock(&#123;</div><div class="line">		data: &apos;test&apos;</div><div class="line">	&#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>Mockjs模拟了很多场景，人名省份城市时间等，因为作者是中国人，所以包含了中国各个城市，并且可以模拟中文名。详细可以参照官网示例：<a href="http://mockjs.com/examples.html" target="_blank" rel="external">点击跳转</a>。这里简单介绍一个例子，模拟一个100个城市的数组(在官网示例页面控制台可以自己玩)：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mock.mock(&#123;&apos;data|100&apos;:[&apos;@city&apos;]&#125;)</div></pre></td></tr></table></figure>
-<p>看，是不是很方便。</p>
-<h3 id="3-RAP和swagger"><a href="#3-RAP和swagger" class="headerlink" title="3.RAP和swagger"></a>3.RAP和swagger</h3><p>因为Mockjs拦截了ajax请求，所以我们没办法从浏览器控制台看到请求的信息。而且我们需要向我们的项目中引入其他代码，在上线的时候需要记得把它去掉。所以我们有没有更深一层优雅的方法呢？方法肯定是有的，轮子已经造好了，就等着我们去用了。</p>
-<h4 id="RAP"><a href="#RAP" class="headerlink" title="RAP"></a>RAP</h4><p>RAP是阿里出的一个接口管理系统，结合了文档、Mock.js、可视化、Rest、接口过渡、文档修改提醒、支持本地部署。简单来说就是一个管理系统，你可以在上面添加团队-&gt;项目-&gt;页面-&gt;接口，将公司的各产品的接口集中管理起来，并且系统可以根据添加的接口填写的内容，生成模拟接口。这可以让前端人员开发时调用。详细的用法还是看官网介绍比较清楚，注册一个号去玩玩也是很方便的：<a href="http://rap.taobao.org/" target="_blank" rel="external">点击跳转</a></p>
-<h4 id="swagger"><a href="#swagger" class="headerlink" title="swagger"></a>swagger</h4><p>而swagger是一个通过编写接口文档，生成接口模拟数据的工具。文档需按照某种格式编写。好处就是以文档的形式比较好维护，但坏处就是需要熟悉文档格式需要一个过程，而且没有像RAP那样将接口分团队分项目页面进行管理。<a href="http://editor.swagger.io/#/" target="_blank" rel="external">点击跳转</a></p>
-<h3 id="4-模拟页面数据"><a href="#4-模拟页面数据" class="headerlink" title="4.模拟页面数据"></a>4.模拟页面数据</h3><p>文章到了这里本应该结束了，但是我想起如果要模拟一个页面返回要怎么办呢？作为一个切图仔，我想说就交给后端去做吧，除非页面就是我们切图仔负责写的。但如果页面不是用nodejs写的，类似jsp页面，也不是我们负责的，我们该怎么办呢。这时候我们只能用一些简陋的方法，在nodejs力所能及的范围内将页面进行渲染。例如有这么一个插件（<a href="https://github.com/DanielSchaffer/node-jsp" target="_blank" rel="external">点击跳转</a>），它可以对一些简单的&lt;c&gt;标签语法进行解析渲染，对于无法解析的内容则当成页面内容输出，利用这种插件就可以启动一个nodejs服务来完(jian)美(lou)地模拟一个页面了!</p>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/11/2016-10-11-mock-data/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-
-
-
   
-    <article id="post-2016-07-23-webpack-vue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/23/2016-07-23-webpack-vue/">实战webpack+vue</a>
-    </h1>
-  
-
-        
-        <a href="/2016/07/23/2016-07-23-webpack-vue/" class="archive-article-date">
-  	<time datetime="2016-07-23T09:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>变懒了，发现原来已经半年没写过一篇东西了，这半年，又换了一个工作的地方，现在觉得，人不能太浮躁。当然，也还是要有跳出舒适区的决心。</p>
-<h3 id="为什么使用vue"><a href="#为什么使用vue" class="headerlink" title="为什么使用vue"></a>为什么使用vue</h3><p>虽然换了工作，但是工作内容还是没有变化多少，目前为止接触的还是一些to B的管理系统项目，作为一个前端，没能负责一个to C的产品，还是有点小伤感的。好的是没有旧项目要维护，一切从零开始，而且不用兼容低版本浏览器。所以项目在技术选型上是很自由的。现在基本上是使用了webpack＋vue的技术方案。之所以选择vue有以下几个原因：</p>
-<ul>
-<li>vue结合了Angular和React的优点，可以方便的使用数据双向绑定，又可以方便的实现组件化</li>
-<li>很重要的一点，公司有使用vue的项目经验</li>
-<li>vue上手比较快，基本上看一天教程就可以上手干活了（这点对我们来说非常重要。。）</li>
-<li>社区现在也很活跃，作者尤大貌似要全职做vue开发了</li>
-</ul>
-<p>因为ES6是后面的趋势，所以就直接上了vue推荐的方案：使用webpack+ES6+vue-loader。</p>
-<h3 id="先弄个ES6吧"><a href="#先弄个ES6吧" class="headerlink" title="先弄个ES6吧"></a>先弄个ES6吧</h3><p>以下进入正题，首先从package.json文件开始吧，先看一下需要什么npm包能够用ES6把vue写起来：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;vue-webpack&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</div><div class="line">    &quot;dev&quot;: &quot;webpack&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;author&quot;: &quot;&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;,</div><div class="line">  &quot;devDependencies&quot;: &#123;</div><div class="line">    &quot;babel-core&quot;: &quot;^6.11.4&quot;,</div><div class="line">    &quot;babel-loader&quot;: &quot;^6.2.4&quot;,</div><div class="line">    &quot;babel-preset-es2015&quot;: &quot;^6.9.0&quot;,</div><div class="line">    &quot;webpack&quot;: &quot;^1.13.1&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;vue&quot;: &quot;^1.0.26&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们除了使用babel-core和babel-loader外，还要使用babel-preset-es2015，因为在babel 6之后，默认没有指定转换的js版本，所以这里跑了webpack之后是不会将ES6代码转换的，如果需要转换ES2015，即需要安装多这个包。再写好webpack.config.js后，我们就可以愉快地开始coding了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">var path = require(&apos;path&apos;);</div><div class="line">module.exports = &#123;</div><div class="line">    entry: &quot;./entry.js&quot;,</div><div class="line">    output: &#123;</div><div class="line">        path: &apos;./static&apos;,</div><div class="line">        publicPath: &apos;/static/&apos;,</div><div class="line">        filename: &apos;main.js&apos;</div><div class="line">    &#125;,</div><div class="line">    module: &#123;</div><div class="line">        // 特定规则的文件与特定loader的映射</div><div class="line">        loaders: [</div><div class="line">            &#123;</div><div class="line">                test: /\.js$/,</div><div class="line">                loader: &apos;babel&apos;,</div><div class="line">                query: &#123;</div><div class="line">                    // since babel 6 needs preset to determin what to transform</div><div class="line">                    presets: [&apos;es2015&apos;]</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    resolve: &#123;</div><div class="line">        root: [__dirname + &apos;/src&apos;]</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    devtool: &apos;#source-map&apos;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="加个vue-loader"><a href="#加个vue-loader" class="headerlink" title="加个vue-loader"></a>加个vue-loader</h3><p>其实这个vue-loader我个人是觉得可有可无的，因为我认为组件的样式和模板是没必要放在一个文件的，至少在我的项目是这样。但是为了尝鲜还是决定用一下。<br>所需npm包如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    &quot;vue-loader&quot;: &quot;^8.5.3&quot;,</div><div class="line">    &quot;vue-hot-reload-api&quot;: &quot;^1.2.0&quot;,</div><div class="line">    &quot;vue-html-loader&quot;: &quot;^1.2.3&quot;,</div><div class="line">    &quot;vue-style-loader&quot;: &quot;^1.0.0&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>而webpack.config.js加上对应的loader，还有有一些不用babel转换的就剔除掉（exclude）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">loaders: [</div><div class="line">    &#123;</div><div class="line">        test: /\.vue$/,</div><div class="line">        loader: &apos;vue&apos;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        test: /\.js$/,</div><div class="line">        loader: &apos;babel&apos;,</div><div class="line">        exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,</div><div class="line">        query: &#123;</div><div class="line">            // since babel 6 needs preset to determin what to transform</div><div class="line">            presets: [&apos;es2015&apos;]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
-<p>至此已经可以愉快地用es6写vue啦，可以参考这个例子：<a href="https://github.com/plusice/vue-app/tree/v1.0" target="_blank" rel="external">点击跳转</a>，下载下来安装完npm包后，执行“npm run dev”，再“npm run test”就可以看到效果啦</p>
-<h3 id="一个应用骨架"><a href="#一个应用骨架" class="headerlink" title="一个应用骨架"></a>一个应用骨架</h3><p>配置好基础的几个包，可以着手开始一个应用骨架的搭建了，我目前主要做是管理系统，就搭建一个后台管理系统的骨架吧。<br>搭建一个应用，我们还需要路由，通信模块，还有样式。路由不用说就是vue-router,通信使用jquery，考虑到jquery还可能有其他用途，样式就弄一个amaze UI，自己样式用sass编写。最后的webpack.config.js是这样子的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">var path = require(&apos;path&apos;);</div><div class="line">module.exports = &#123;</div><div class="line">    entry: &quot;./src/entry.js&quot;,</div><div class="line">    output: &#123;</div><div class="line">        path: &apos;./static&apos;,</div><div class="line">        publicPath: &apos;/static/&apos;,</div><div class="line">        filename: &apos;main.js&apos;</div><div class="line">    &#125;,</div><div class="line">    module: &#123;</div><div class="line">        loaders: [</div><div class="line">            &#123;</div><div class="line">                test: /\.vue$/,</div><div class="line">                loader: &apos;vue&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                test: /\.scss$/,</div><div class="line">                loaders: [&quot;style&quot;, &quot;css&quot;, &quot;sass&quot;] </div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                test: /\.js$/,</div><div class="line">                loader: &apos;babel&apos;,</div><div class="line">                exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,</div><div class="line">                query: &#123;</div><div class="line">                    // since babel 6 needs preset to determin what to transform</div><div class="line">                    presets: [&apos;es2015&apos;]</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    resolve: &#123;</div><div class="line">        root: [path.resolve(__dirname, &quot;./src&quot;)]</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    devtool: &apos;#source-map&apos;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>最终骨架效果如下：</p>
-<p><img src="/images/amazeui.png" alt="图片"></p>
-<p>代码在这里：<a href="https://github.com/plusice/vue-app" target="_blank" rel="external">点击跳转</a>，持续更新中…</p>
-<p>最近添加了些组件：<a href="https://plusice.github.io/vue-app/" target="_blank" rel="external">demo</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/07/23/2016-07-23-webpack-vue/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2015-08-21-inline-block" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/2015-08-21-inline-block/">从inline-block到line-height到vertical-align</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/24/2015-08-21-inline-block/" class="archive-article-date">
-  	<time datetime="2016-02-23T16:40:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&ensp;&ensp;&ensp;&ensp;又有东西可以写的,为何又是样式相关的,其实我很想写点其他的啊啊啊.<br>&ensp;&ensp;&ensp;&ensp;最近做公司招聘网站被设计给虐惨了,一方面是设计太年轻太严谨了,一方面自己做的也不好,好一些图标的垂直对齐都用像素调整,导致被设计师贼亮的眼睛发现好多个一两个像素的差距,最终导致我需要改动好多.之前以为vertical-align效果不同浏览器会有差异所以没怎么用,但现在我已追悔莫及~~让我先从inline-block讲起吧</p>
-<h3 id="inline-block"><a href="#inline-block" class="headerlink" title="inline-block"></a>inline-block</h3><p>&ensp;&ensp;&ensp;&ensp;一些line box什么的就不说了,直接切入问题.举一个栗子可能很多人都遇到类似情况:一个div大小为20px,里面两个inline-block元素,一个不含文本,宽度高度均20px,另一个line-height为20px,包含文本,然后我们会发现div容器是不止20px高的<a href="#eg-link">看例1</a>.<br>&ensp;&ensp;&ensp;&ensp;这是什么原因呢,其实是inline-block元素的垂直对齐引起的.inline box垂直方向上默认是与其baseline对齐的，而它的baseline又是和包裹它的line box的baseline对齐的。而当一个inline box里面没有包含文本的时候，没有了baseline，没有基准可以对齐,所以定了一个妥协的规则，就是把该box的底部对准包裹它的line box的baseline。而baseline又是在文本的底线上面的,所以整体会把容器给撑高了.<br>&ensp;&ensp;&ensp;&ensp;那么问题来了,linebox的baseline又是怎么定的呢,很简单,它包裹的带文本的所有inline box,高度最高的那个的baesline就是linebox的baesline,当然这个高度不是指盒子高度,而是指inline box的line-height撑高的高度.这里要注意的是,多行文本的inline box的baseline是以最后一行为基准的<a href="#eg-link">看例2</a>.而如果没有包含文本,就是以自身给定的line-height来决定<a href="#eg-link">看例3</a>.最后,如果包含文本,本身也设置了line-height,那就哪个高听哪个.</p>
-<h3 id="line-height"><a href="#line-height" class="headerlink" title="line-height"></a>line-height</h3><p>&ensp;&ensp;&ensp;&ensp;再来看看line-height,我还是搬砖就行吧:<a href="http://www.zhangxinxu.com/wordpress/2009/11/css%E8%A1%8C%E9%AB%98line-height%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8/" target="_blank" rel="external">戳我</a><br>&ensp;&ensp;&ensp;&ensp;总结为一句:line-height撑高容器而不是文字撑高容器,line-height垂直平分线始终与文字的垂直平分线重合。</p>
-<h3 id="vertical-align"><a href="#vertical-align" class="headerlink" title="vertical-align"></a>vertical-align</h3><p>&ensp;&ensp;&ensp;&ensp;再来看看vertical-align,我还也是搬砖就行吧:<a href="http://www.zhangxinxu.com/wordpress/2010/05/%E6%88%91%E5%AF%B9css-vertical-align%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3%E4%B8%8E%E8%AE%A4%E8%AF%86%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" rel="external">戳我</a><br>&ensp;&ensp;&ensp;&ensp;总结为两句:vertical-align只对inline或inline-block元素有效，<del>是相对于父元素的line-height垂直对齐</del>,实验发现是子元素竖直方向中点与父元素font-size值对应的base-line对齐。vertical-align:text-bottom是相对于父元素文本底部，vertical-align:bottom是相对于父元素line-height底部。<br>&ensp;&ensp;&ensp;&ensp;各个基线可以参考:<br><img src="http://2.bp.blogspot.com/-sthQ7pdqw0k/UENQUh1ei-I/AAAAAAAAALk/jb1Ir8dAF6o/s400/Vertical%2BAlign_crop.png"></p>
-<p>&ensp;&ensp;&ensp;&ensp;貌似有点虎头蛇尾了呢,但别人确实写的不错,就不重复造轮子咯.</p>
-<h4 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a><a href="http://jsfiddle.net/plusice/wg08hfmq/2/" id="eg-link" target="_blank" rel="external">栗子</a></h4><hr>
-<p>(2015-08-31补充)<br>今天发现css大神张鑫旭新写的一篇博客跟我这里内容类似,不过很详细,内容更多(虽然比较啰嗦哈哈):<a href="http://www.zhangxinxu.com/wordpress/2015/08/css-deep-understand-vertical-align-and-line-height/" id="eg-link" target="_blank" rel="external">戳我吧</a>.文中的”基本现象衍生：垂直居中”让我顿悟.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/24/2015-08-21-inline-block/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2016-01-27-chrome-highlighter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/2016-01-27-chrome-highlighter/">chrome文本高亮笔记插件</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/24/2016-01-27-chrome-highlighter/" class="archive-article-date">
-  	<time datetime="2016-02-23T16:40:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>好久没有写点东西了,最近天冷也懒了点.但不能就这么荒废了,安利一下前阵子写的一个chrome小插件</p>
-<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>使用evernote剪藏的时候发现并不是很好用,每次保存都会新建一个文章进行保存,而我的使用场景是,看到一段想保存的文字,选择保存,然后保存到同一个地方.因为剪藏不能满足,所以写了一个小插件.插件可对文本进行高亮,并且高亮的文本会保存到插件的弹出窗口中,使用者可进行编辑.效果可以看我github介绍:<a href="https://github.com/plusice/simple_note" target="_blank" rel="external">点击跳转</a></p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>实现也相对比较简单.被选择文本内容,通过监听chrome.contextMenus点击,在处理事件的时候可直接获取.需要做的主要就是对选择的文本进行高亮.</p>
-<p>文本的高亮通过插入标签,给标签设置颜色实现.所以主要任务变成识别选择的页面内容,然后插入标签,这个可以使用Range对象实现,Range对象可以获取到文本start端和end端的文本节点.基本的思路就是,获取选择文本的Range对象,然后根据对象获取到文本start端的节点,然后给节点添加标签,将节点内容从选择内容剔除,再从新的内容的start端进行同样操作,直到start端节点等于end端节点.当然其中也有一些问题需要处理,不过基本也就是这些了.</p>
-<h4 id="2016年展望"><a href="#2016年展望" class="headerlink" title="2016年展望"></a>2016年展望</h4><p>健健康康就好了~</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/24/2016-01-27-chrome-highlighter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2015-11-30-angular2初试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/2015-11-30-angular2初试/">angular2初试</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/24/2015-11-30-angular2初试/" class="archive-article-date">
-  	<time datetime="2016-02-23T16:40:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>很久很久以前，就总是听人们在讨论着angular2（以下简称ng2，angualr1.x简称ng1），而今其beta版本已发布了好几个月，最近刚好有时间于是拿来试玩一下。</p>
-<h3 id="一-初代和二代的简单对比"><a href="#一-初代和二代的简单对比" class="headerlink" title="一.初代和二代的简单对比"></a>一.初代和二代的简单对比</h3><p>据说ng2是不兼容ng1的，有这么几点很大的不同：</p>
-<ul>
-<li>使用TypeScript编写</li>
-<li>没有Controllers</li>
-<li>没有双向数据绑定，不过ng2提供了强大的forms module提供类似功能</li>
-<li>组件化</li>
-<li>新的Router</li>
-<li>模块化</li>
-<li>没有$scope</li>
-<li>使用Tempate的错误提示</li>
-</ul>
-<p>所以剩下没变的，好像也就filters了。那为什么做这么大改变呢，ng2团队给出了解释，下面简单列一下：</p>
-<ul>
-<li><strong>性能限制</strong>：双向绑定和模板等性能问题</li>
-<li><strong>前端的快速发展</strong>：ES6标准的确定，组件化模块化的发展</li>
-<li><strong>移动端的需求</strong>：移动端要求的高性能ng1满足不了</li>
-<li><strong>易用性</strong>：ng1太复杂学习曲线太陡峭</li>
-</ul>
-<p>我对性能方面的考虑倒没那么多，而如果用在手机端可能也会先考虑reactjs。但是使用过ng2后，它的模块化组件化着实让我眼前一亮！和ng1那种糟糕的写法比起来简直就是：完美～！</p>
-<h3 id="二-angular2代码怎么写"><a href="#二-angular2代码怎么写" class="headerlink" title="二.angular2代码怎么写"></a>二.angular2代码怎么写</h3><p>angular2可以使用ejs5，ejs6或typescript进行开发。ejs5的话就别用了，使用ejs6/typescript才能使ng2的模块化组件化代码更加漂亮，兼容问题在浏览器端把代码编译成ejs5即可。因为ejs6标准还不支持decorator，编译配置稍微麻烦一点，这里参考官网typescript版的<a href="https://angular.io/docs/ts/latest/quickstart.html" target="_blank">quik-start</a>例子，简单介绍一下，详细内容可参照官网。</p>
-<p>按照quik-start，构建一个ng2应用非常简单，我们新建一个app.ts，然后按下面三步写入代码：</p>
-<h4 id="1-从angular2模块引入依赖"><a href="#1-从angular2模块引入依赖" class="headerlink" title="1.从angular2模块引入依赖"></a>1.从angular2模块引入依赖</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import &#123;bootstrap, Component&#125; from &apos;angular2/angular2&apos;;</div></pre></td></tr></table></figure>
-<p>import在typescript中可以从其他模块引入方法/对象等依赖，这里我们引入了bootstrap方法和Component类。</p>
-<h4 id="2-编写一个组件"><a href="#2-编写一个组件" class="headerlink" title="2.编写一个组件"></a>2.编写一个组件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@Component(&#123;</div><div class="line">    selector: &apos;my-app&apos;,</div><div class="line">    template: &apos;&lt;h1&gt;My First Angular &#123;&#123;version&#125;&#125; App&lt;/h1&gt;&apos;</div><div class="line">&#125;)</div><div class="line">class AppComponent &#123;</div><div class="line">    public version = 2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>class用于定义一个类，这里定义了一个AppComponent类，而@Component对类进行注解（annotation），告诉ng2这是一个component，也就是一个组件，并且组件将会渲染到my-app元素，而渲染的模板就是template指定的内容。annotation的详细内容可自行谷歌，这里你只要知道AppComponent经过注解后就变成了一个ng2组件。</p>
-<h4 id="3-初始化应用"><a href="#3-初始化应用" class="headerlink" title="3. 初始化应用"></a>3. 初始化应用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bootstrap(AppComponent);</div></pre></td></tr></table></figure>
-<p>bootstrap方法告诉ng2用AppComponent组件初始化应用。方法执行后组件就会被渲染到dom上了。</p>
-<hr>
-<p>就看这么一个简单的例子，是不是就被吸引了呢，我反正是被吸引了。想想以前ng1的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">angular.module(&apos;myapp&apos;, [&apos;mymodule&apos;])</div><div class="line">    .controller(&apos;myctrl&apos;, function($scope, $xxx) &#123;</div><div class="line"></div><div class="line">        $scope.xxx = &apos;&apos;;</div><div class="line">        $scope.xxxx = &apos;&apos;;</div><div class="line">        ...</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>太多$scope什么的看了很烦啊，依赖的mymodule和$xxx从哪来的我不知道啊,什么，哪块地方忘了调$digest()视图好像没更新啊。使用ng2一切都清晰了好多。(这里只是写出一个ng1的controller，所以其实也没那么难看)</p>
-<p>不过到这里还不能看到效果，我们还需要一个页面，但是浏览器端不能执行typescript啊，模块化的那套也没有实现啊，这时候一些附加的工具派上用场了。先提供我在官网上抄下来的代码<a href="https://github.com/plusice/angular2-helloworld/tree/v1.1" target="_blank">angular2-helloworld</a>，需要用的可以clone下来，共有三个tag。</p>
-<h3 id="三-一个angular2应用的基本架构"><a href="#三-一个angular2应用的基本架构" class="headerlink" title="三.一个angular2应用的基本架构"></a>三.一个angular2应用的基本架构</h3><p>要跑通一个ag2应用，有一个app.ts文件是远远还不够的，我们需要把代码编译成浏览器支持的代码，并且支持模块化。如果是使用es6也是类似，因为现在大部分浏览器都还不支持es6标准，es6也还不支持annotation/decorator。我们还是以typescript为例，先看一下在浏览器端对代码进行处理的方法，这种方法我们只需要在页面引入一些小脚本（es6-shim.js需要安装）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;Angular 2 QuickStart&lt;/title&gt;</div><div class="line">        &lt;!-- Angular 2 requires ES6 support --&gt;</div><div class="line">        &lt;script src=&quot;node_modules/es6-shim/es6-shim.js&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;!-- System.js is the module loader, a tool that can import code --&gt;</div><div class="line">        &lt;script src=&quot;https://code.angularjs.org/tools/system.js&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;!-- compile typescript --&gt;</div><div class="line">        &lt;script src=&quot;https://code.angularjs.org/tools/typescript.js&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;script src=&quot;https://code.angularjs.org/2.0.0-alpha.44/angular2.dev.js&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;script&gt;</div><div class="line">          // System compiles typescript to javascript,depends on typescript.js</div><div class="line">          System.config(&#123;</div><div class="line">              transpiler: &apos;typescript&apos;,</div><div class="line">              typescriptOptions: &#123;</div><div class="line">                  emitDecoratorMetadata: true</div><div class="line">              &#125;</div><div class="line">          &#125;);</div><div class="line">          System.import(&apos;./app.ts&apos;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line"></div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;my-app&gt;loading...&lt;/my-app&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>新建一个目录，放置好目前完成的两个文件，npm install live-server es6-shim，开启服务器就可以看到页面拉！<a href="https://github.com/plusice/angular2-helloworld/tree/v1.1" target="_blank">angular2-helloworld</a></p>
-<p>从注释我们应该都已经知道各个脚本的功能了。这里最重要的就是System.js这个库。它时angular官网使用的模块管理器，实现了对angular的模块管理，并且可调用typescript.js对相关typescript代码模块进行编译加载，需要知道的是angular2.dev.js中调用了System.js接口存储了“angular2/angular2”模块，如果没有做这一步，在app.ts中import必须指定到具体路径，后缀也不能省略，类似seajs。</p>
-<p><strong>另外一种方法</strong>，我们可以在生产环境编译typescript，然后浏览器访问编译后的代码，实际应用中肯定是选择这种方法。这种方法我们需要安装typescript，编写编译配置文件，对typescript文件进行编译。所以页面也就不需要引用typescript.js了。而且System.js配置需要做些更改：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 下面配置了脚本使用js</div><div class="line">System.config(&#123;</div><div class="line">    packages: &#123;&apos;app&apos;: &#123;defaultExtension: &apos;js&apos;&#125;&#125;</div><div class="line">&#125;);</div><div class="line">System.import(&apos;app/app&apos;);</div></pre></td></tr></table></figure>
-<p>代码可参考：<a href="https://github.com/plusice/angular2-helloworld/tree/v1.2" target="_blank">angular2-helloworld</a></p>
-<p>由demo我们可以得出ng2的一个简单架构（typescript版）：</p>
-<p><img src="/images/ng2_framework.png"></p>
-<p>通过System.js进行模块管理，包括ng2和应用模块，应用模块使用typescript编写，但是最终会编译成es5代码，最后这些模块（angular组件）和angular2与视图进行交互。而当浏览器支持es6后，可以把图中System.js和typescript两块除去，这时候浏览器充当了模块管理器，脚本也不用再编译了。<br>当然，这只是一个简单的架构，实际应用起来不会这么简单，例如System.js的模块还需要用jspm进行管理，关于System.js+jspm的内容可以多写一篇很长的博客了。</p>
-<h3 id="四-最后的感慨"><a href="#四-最后的感慨" class="headerlink" title="四.最后的感慨"></a>四.最后的感慨</h3><p>前端发展实在太快了，各种框架各种工具层出不穷，要努力保持学习的状态！也要敢于挑战和使用新的技术，特别是在实际项目中！不过angular2现在还未发布正式版本，所以只能先做了解而已。如果对这种模块化组件化思想有兴趣的，可以尝试一下webpack+vue.js，我对此还未做过实践，不知道效果如何。另外框架的使用还是要结合项目，不要一味追求潮流，按照前端现在的发展，可能追不上潮流还会被挫败得一身伤。</p>
-<h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><blockquote>
-<p><a href="http://blog.mgechev.com/2015/04/06/angular2-first-impressions/" target="_blank" rel="external">ng1和ng2区别</a><br><a href="http://blog.thoughtram.io/angular/2015/05/03/the-difference-between-annotations-and-decorators.html" target="_blank" rel="external">annotation和decorator区别</a><br><a href="https://angular.io/docs/ts/latest/quickstart.html#es6support" target="_blank" rel="external">官网demo</a></p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/24/2015-11-30-angular2初试/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2015-08-15-cors跨域options请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/2015-08-15-cors跨域options请求/">CORS  options请求</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/24/2015-08-15-cors跨域options请求/" class="archive-article-date">
-  	<time datetime="2016-02-23T16:40:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;终于找到时间（不偷懒）来填三个星期前挖的坑了，虽然不是什么干货，但是通过写写文章，也可以增强自己的语言组织能力，这点对程序员后面的发展也是至关重要的。切入正题，这次记录以下我用cors跨域时失败的问题（不涉及cookie跨域）。</p>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;前两周和一个后端在集成接口，因为前端代码在我本地，后端接口在他机子上，所以让他设置cors让我可以跨域访问。然而，结果却老是得到一个404请求，查看请求信息发现是发了一个options请求，而本来的请求都没有发出去。我当时就纳闷了，自己之前用nodejs试过后端Access-Control-Allow-Origin就行啦，为何这次就不行。然后试着用原生的ajax请求和jquery请求都可以哇。</p>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;google了些许时间后才发现问题，我前端使用angualr写的，其他人的认证模块在请求里插入了自定义的头域，而这是cors请求出现options预请求的其中一种情况，当出现以下一种情况就会发出预请求（其他情况和正常请求一样）：</p>
-<ul>
-<li>请求以 GET, HEAD 或者 POST 以外的方法发起请求。或者，使用 POST，但请求数据为 application/x-www-form-urlencoded, multipart/form-data 或者 text/plain 以外的数据类型。比如说，用 POST 发送数据类型为 application/xml 或者 text/xml 的 XML 数据的请求。</li>
-<li>使用自定义请求头（比如添加诸如 X-PINGOTHER）。</li>
-</ul>
-<pre><code>提示：从Gecko 2.0开始，text/plain, application/x-www-form-urlencoded 和 multipart/form-data 类型的数据都可以直接用于跨站请求，而不需要先发起“预请求”了。之前，只有 text/plain 可以不用先发起“预请求”，进行跨站请求。
-</code></pre><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;找到发起options请求的原因了，那为什么会404呢，原因也是非常简单，后端没处理。。。所以其实一切的一切都不是前端的问题，想允许跨域，后端对原始请求设置Access-Control-Allow-Origin响应头，对其预请求——options请求进行响应，并对options请求添加相关响应头即可：</p>
-<pre><code>Access-Control-Allow-Origin: ＊                      // 允许跨域的域名
-Access-Control-Allow-Methods: POST, GET, OPTIONS     // 允许跨域的方法
-Access-Control-Allow-Headers: X-PINGOTHER            // 允许跨域的自定义头域
-</code></pre><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;最后附上nginx对options请求的响应处理，因为nginx好像默认不支持options请求，可以这么做（其实用if是不太好的）：</p>
-<pre><code>location / {
-    if ($request_method = OPTIONS ) {
-        add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;
-        add_header &apos;Access-Control-Allow-Methods&apos; &apos;POST, GET, OPTIONS&apos;;
-        add_header &apos;Access-Control-Allow-Headers&apos; &apos;X-PINGOTHER&apos;;
-        return 200;
-    }
-}
-</code></pre><p>参考链接：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">点击跳转</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/24/2015-08-15-cors跨域options请求/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2015-11-11-html渲染奥秘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/2015-11-11-html渲染奥秘/">html渲染奥秘</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/24/2015-11-11-html渲染奥秘/" class="archive-article-date">
-  	<time datetime="2016-02-23T16:40:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在html5流行泛滥的今天,作为一个web前端,你应该已经写过了无数的动画效果,你或许也在你的css3动画中加上了translate3d,使得动画流畅,但究竟这个为什么能使动画流畅呢,还有其他的东西能影响到动画的性能,或者说网页渲染的性能呢?</p>
-<p><b>下面的内容将介绍页面渲染过程对性能是如何影响性能的:</b><br><em>内容基于 WebKit，更准确的说，是 WebKit 的 Chromium 分支,不过其他浏览器大体一致</em></p>
-<h3 id="一-一个html文档-从解析到屏幕"><a href="#一-一个html文档-从解析到屏幕" class="headerlink" title="一.一个html文档,从解析到屏幕"></a>一.一个html文档,从解析到屏幕</h3><p>一个html文档从解析到渲染到屏幕,大致上有以下几步:</p>
-<ol>
-<li>html文档生成DOM树</li>
-<li>CSS代码转化成CSSOM</li>
-<li>DOM+CSSOM生成渲染树</li>
-<li>根据渲染树上节点的位置大小等信息进行布局(layout)</li>
-<li>将布局绘制到bitmap上</li>
-<li>bitmap传输至GPU然后绘制到屏幕</li>
-</ol>
-<p>这个过程我们可以用chrome开发者工具清楚的看到:</p>
-<blockquote>
-<p><img src="/images/parsehtml.png" alt="图1"></p>
-</blockquote>
-<p>不过注意想要看到上图所示的瀑布流,需要取消帧模式和事件模式:</p>
-<blockquote>
-<p><img src="/images/tooltip.png" alt="图2"></p>
-</blockquote>
-<p>浏览器所做的这些操作都要耗费时间,所以做的越少,性能越好,前3步我们是没办法做改变的.但页面解析完毕呈现在屏幕上后,后面的3个操作会因为某些操作而被触发,例如动画,而且触发越靠前的操作,浏览器需要做的越多,因为一旦触发一个步骤,后面的步骤都要再做一遍.因此我们可以做的就是从后面三个步骤入手,优化页面的性能.</p>
-<h3 id="二-layout-paint-composite"><a href="#二-layout-paint-composite" class="headerlink" title="二.layout,paint,composite"></a>二.layout,paint,composite</h3><p>我们首先得了解layout,paint,composite的触发条件有哪些</p>
-<h5 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h5><blockquote>
-<p>改变width/height/padding/margin/left/top等有关位置和大小的空间样式<br>改变上面的样式后,再读取offsetTop/scrollTop/clientTop等位置大小信息</p>
-</blockquote>
-<h5 id="paint"><a href="#paint" class="headerlink" title="paint"></a>paint</h5><blockquote>
-<p>改变color/box-shadow/background/outline等有关表现的样式</p>
-</blockquote>
-<h5 id="composite"><a href="#composite" class="headerlink" title="composite"></a>composite</h5><blockquote>
-<p>改变opacity/z-index等</p>
-</blockquote>
-<p>所以,要提高网页渲染性能,我们首先可以尽量减少这些触发条件的出现,即使出现,也要尽量降低触发频率.现代浏览器会只能得将元素样式变动尽量一次执行,减少重复渲染.但是,如果我们像下面这样写,就会出现重复重排:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">div.style.left = div.offsetLeft + 10 + &quot;px&quot;;</div><div class="line">div.style.top = div.offsetTop + 10 + &quot;px&quot;;</div></pre></td></tr></table></figure>
-<p>上面代码第一行对div.style.left进行改变,后续进行一次读操作触发一次重排以获取最新offsetTop,最后再改变div.style.top,触发又一次重排<br>所以我们要尽量将读写操作写在一起:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var left = div.offsetLeft;</div><div class="line">var top  = div.offsetTop;</div><div class="line">div.style.left = left + 10 + &quot;px&quot;;</div><div class="line">div.style.top = top + 10 + &quot;px&quot;;</div></pre></td></tr></table></figure>
-<p>那么,我们还有其他方法吗,例如采用不触发layout和paint的方法.答案是可以的,那就是利用硬件加速.</p>
-<h3 id="三-硬件加速"><a href="#三-硬件加速" class="headerlink" title="三.硬件加速"></a>三.硬件加速</h3><p>所谓的硬件加速,就是通过生成一个特殊的GraphicsLayer层,让元素的渲染都在层中进行,而对元素的某些css操作并不会引起重排或重绘,这些css操作主要是transform等css3变换.硬件加速主要也应用在相关的css3动画中.</p>
-<p>其原理是:</p>
-<ol>
-<li>dom解析时在某些条件下生成GraphicsLayer,每个层将独立的绘制进bitmap中</li>
-<li>bitmap传输到GPU作为texture渲染,并存储起来</li>
-<li>特定css属性的变化,可以让层不用重新paint,而直接通过GPU中的textrue进行重新复合生成最终的屏幕图像,达到加速目的</li>
-</ol>
-<p>从上面我们可以得知,加速的奥秘就在于不必让CPU进行重绘或重排,而将工作分配给了GPU;并且没有了重绘,bitmap传输到GPU的步骤也节省了.<br>而触发GraphicsLayer生成的条件之一就是使用translate3d,具体来说有以下一些条件:</p>
-<ul>
-<li>3D 或透视变换(perspective transform) CSS 属性</li>
-<li>使用加速视频解码的 video 元素</li>
-<li>拥有 3D (WebGL) 上下文或加速的 2D 上下文的 canvas 元素</li>
-<li>混合插件(如 Flash)</li>
-<li>对自己的 opacity 做 CSS 动画或使用一个动画 webkit 变换的元素</li>
-<li>拥有加速 CSS 过滤器的元素</li>
-<li>元素有一个包含复合层的后代节点(换句话说，就是一个元素拥有一个子元素，该子元素在自己的层里)</li>
-<li>元素有一个 z-index 较低且包含一个复合层的兄弟元素(换句话说就是该元素在复合层上面渲染)</li>
-</ul>
-<p><em>注意的是,硬件加速不能滥用,上面所说的z-index较低的触发条件就可能是一个坑,参见:<a href="http://div.io/topic/1348" target="_blank">大神分享</a></em></p>
-<p>以上是文章全部内容<br>参考连接:</p>
-<blockquote>
-<p><a href="http://melonh.com/sharing/slides.html?file=high_performance_animation#/" target="_blank" rel="external">http://melonh.com/sharing/slides.html?file=high_performance_animation#/</a><br><a href="http://www.html5rocks.com/zh/tutorials/speed/high-performance-animations/" target="_blank" rel="external">http://www.html5rocks.com/zh/tutorials/speed/high-performance-animations/</a><br><a href="http://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html</a></p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/24/2015-11-11-html渲染奥秘/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2015-07-29-sass初试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/2015-07-29-sass初试/">sass入门使用总结</a>
-    </h1>
-  
-
-        
-        <a href="/2016/02/24/2015-07-29-sass初试/" class="archive-article-date">
-  	<time datetime="2016-02-23T16:40:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;虽然sass出了很久了，但一直没有使用，因为在前公司没有使用编译工具，只有自己使用的话会怕导致不好维护（其实也是懒的借口）。</p>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;最近公司的一个小项目，我开始了sass的使用。其实一开始用sass，我也是拒绝的，因为没有使用过，而项目稍微有点紧，怕不熟悉而影响进度。好吧，说来也惭愧，前端入坑已几年，竟然还没有用过这东西，哭！然而！使用之后duangduang的却发现，这玩意上手简直及其简单，可能也是我只是使用了比较简单的功能吧。之前试用过less，感觉还是又挺多东西要记的。话不多扯，下面自我总结一番sass的基本用法：</p>
-<h3 id="1-嵌套"><a href="#1-嵌套" class="headerlink" title="1.嵌套"></a>1.嵌套</h3><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;有两种嵌套，一种是选择器嵌套，一种是属性嵌套</p>
-<h4 id="选择器嵌套："><a href="#选择器嵌套：" class="headerlink" title="选择器嵌套："></a>选择器嵌套：</h4><pre><code>.parent {
-    width: 100px;
-    .sub {
-        color: #fff;
-    }
-}
-</code></pre><h4 id="选择器嵌套：-1"><a href="#选择器嵌套：-1" class="headerlink" title="选择器嵌套："></a>选择器嵌套：</h4><pre><code>div {
-    border {
-        style: solid;
-        color: #fff;
-    }
-}
-</code></pre><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;个人觉得选择器嵌套可以少用，因为css选择器层级过多会影响解析速度。类似上面的嵌套，可以直接写一个parent-sub的类名，直接为该类名指定样式。</p>
-<h3 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h3><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;用$符号，可以将某个值声明为一个变量，例如在一个网站中，可以把主题颜色设置成一个变量，主题需要更换的时候只需更改变量，无需更改所有用到主题颜色的元素。</p>
-<pre><code>$theme-color: #0f0;
-</code></pre><h3 id="3-计算"><a href="#3-计算" class="headerlink" title="3.计算"></a>3.计算</h3><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;可能某个元素的宽度要依赖于另外一个来计算，就可以用这个功能啦</p>
-<pre><code>a {
-     width: 2*2px;
-     height: 2+$var;
-}
-</code></pre><h3 id="4-继承"><a href="#4-继承" class="headerlink" title="4.继承"></a>4.继承</h3><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;对于某些有部分类似样式的选择器来说是很有用的。subclass继承了class：</p>
-<pre><code>.class {
-     color: #000;
-}
-.subclass {
-     @extend .class;
-     width: 10px;
-}
-</code></pre><h3 id="5-Mixin"><a href="#5-Mixin" class="headerlink" title="5.Mixin"></a>5.Mixin</h3><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;类似于函数功能，可以将一段样式封装起来，甚至可以传参数，然后用@include引入。这个相当有用哇，例如可以定义一个按钮，把color，border-radius，width，padding的值都当作参数传入，这样 写的时候只要写Mixin和参数值的引用就行了。而且参数支持缺省值哦，相当于函数的默认参数值。</p>
-<pre><code>@mixin test($value:10px) {
-     width: $value;
-     height: 10px;
-}
-div {
-     @include test(20px);
-}
-</code></pre><h3 id="6-配合compass使用"><a href="#6-配合compass使用" class="headerlink" title="6.配合compass使用"></a>6.配合compass使用</h3><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;compass是使用sass的一个工具，在sass的基础上，封装了一系列有用的模块模板，你也可以使用compass来批量处理sass文件，监听文件更改。使用compass可以让你使用很多预定义好的Mixin，会有助于提高编写效率。例如</p>
-<pre><code>div {
-    -webkit-animation: test;
-    -moz-animation: test;
-    animation: test;
-}
-</code></pre><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;引入compass/animation后可以写成</p>
-<pre><code>div {
-    @include animation(test);
-}
-</code></pre><h4 id="好好学习，天天向上，不要惧怕使用新的东西。"><a href="#好好学习，天天向上，不要惧怕使用新的东西。" class="headerlink" title="好好学习，天天向上，不要惧怕使用新的东西。"></a>好好学习，天天向上，不要惧怕使用新的东西。</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/24/2015-07-29-sass初试/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2015-03-15-first-post" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/15/2015-03-15-first-post/">开篇——跳槽之路</a>
-    </h1>
-  
-
-        
-        <a href="/2015/08/15/2015-03-15-first-post/" class="archive-article-date">
-  	<time datetime="2015-08-15T12:07:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;最近在忙着找下家，才知道了自己技术的匮乏。去年试了一下用jekyll在github pages写博客，但是一直没装扮好，现在倒是想抽空弄了一下。可惜windows下安装ruby实在蛋疼，只能复制了一个主题放了上去，这倒促使我想买mbp了。</p>
-<p>2015-03-16<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;今天得知投某易简历被拒了，mark一下。。。</p>
-<p>2015-03-18<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;昨天下班回来竟然发现电脑坏了，开机都开不了。下楼买了一把螺丝刀，但可惜手机查方法有些麻烦，最后没能把笔记本拆开，因为不想浪费时间，今天只能跑去岗顶拿钱给别人赚了。昨晚因为这个还使得心情很差，一度很沮丧，本来回来想投下简历看下资料的，搞得都没干成。<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;看来自己承受挫折的能力还是太差了。最近找下家也使得自己有些不自信，但真心找不到让自己自信的点，只能怪自己之前不够努力。有些迷茫，都有了想考公务员的想法，但不确定自己是否真的适合，最终还是放弃了这个想法。总之，自己选择的路，跪着也要把它走完吧。</p>
-<p>2015-03-22<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;又一周过去了，这周什么收获都没，上周怎么说也面试了两次，拿到一个offer，这周只投了一次简历，学习计划也还没完成。也是因为这周运气不好吧，周二电脑坏了一次，今天电脑又坏了，早上去跟同事借了u盘想重装系统，才发现原来不是系统问题，只能再拿去岗顶。一天又这么没了。唯一高兴的一点是今天刚好有同学去香港，已经帮我把mbp买到了。接下来，继续学习，继续加油！</p>
-<p>2015-04-02<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;虽然没有找到理想的工作，但还是接受第二个offer吧，不想再拖下去了，定下来，好好干，不一定得是大公司才能学到东西，现在就更多大靠自己吧。<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;到现在为止，面试了3家，除了第一次面试某易状态不好挂掉外，拿到两个offer。但是投了好几个简历都没有消息，很受伤啊。。<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;现在总算把工作定下来，mbp也到手了，接下来要好好学习，记住这次跳槽所经历的鄙视。</p>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;周末清明假期，和妹子去珠海澳门调整一下，回来努力工作学习！！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/08/15/2015-03-15-first-post/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-  
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
     </nav>
   
 
@@ -898,9 +232,9 @@ div {
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
