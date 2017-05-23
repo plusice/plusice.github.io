@@ -9,13 +9,14 @@
   <title>实战webpack+vue | plusice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="变懒了，发现原来已经半年没写过一篇东西了，这半年，又换了一个工作的地方，现在觉得，人不能太浮躁。当然，也还是要有跳出舒适区的决心。 为什么使用vue虽然换了工作，但是工作内容还是没有变化多少，目前为止接触的还是一些to B的管理系统项目，作为一个前端，没能负责一个to C的产品，还是有点小伤感的。好的是没有旧项目要维护，一切从零开始，而且不用兼容低版本浏览器。所以项目在技术选型上是很自由的。现在基">
+<meta name="keywords" content="前端工程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实战webpack+vue">
 <meta property="og:url" content="http://yoursite.com/2016/07/23/2016-07-23-webpack-vue/index.html">
 <meta property="og:site_name" content="plusice">
 <meta property="og:description" content="变懒了，发现原来已经半年没写过一篇东西了，这半年，又换了一个工作的地方，现在觉得，人不能太浮躁。当然，也还是要有跳出舒适区的决心。 为什么使用vue虽然换了工作，但是工作内容还是没有变化多少，目前为止接触的还是一些to B的管理系统项目，作为一个前端，没能负责一个to C的产品，还是有点小伤感的。好的是没有旧项目要维护，一切从零开始，而且不用兼容低版本浏览器。所以项目在技术选型上是很自由的。现在基">
 <meta property="og:image" content="http://yoursite.com/images/amazeui.png">
-<meta property="og:updated_time" content="2017-05-22T11:27:38.000Z">
+<meta property="og:updated_time" content="2017-05-23T12:03:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实战webpack+vue">
 <meta name="twitter:description" content="变懒了，发现原来已经半年没写过一篇东西了，这半年，又换了一个工作的地方，现在觉得，人不能太浮躁。当然，也还是要有跳出舒适区的决心。 为什么使用vue虽然换了工作，但是工作内容还是没有变化多少，目前为止接触的还是一些to B的管理系统项目，作为一个前端，没能负责一个to C的产品，还是有点小伤感的。好的是没有旧项目要维护，一切从零开始，而且不用兼容低版本浏览器。所以项目在技术选型上是很自由的。现在基">
@@ -60,8 +61,6 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
-	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -70,6 +69,8 @@
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -108,8 +109,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -126,9 +125,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -156,7 +153,7 @@
 
         
         <a href="/2016/07/23/2016-07-23-webpack-vue/" class="archive-article-date">
-  	<time datetime="2016-07-23T09:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-23</time>
+  	<time datetime="2016-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-23</time>
 </a>
         
       </header>
@@ -172,6 +169,7 @@
 <li>社区现在也很活跃，作者尤大貌似要全职做vue开发了</li>
 </ul>
 <p>因为ES6是后面的趋势，所以就直接上了vue推荐的方案：使用webpack+ES6+vue-loader。</p>
+<a id="more"></a>
 <h3 id="先弄个ES6吧"><a href="#先弄个ES6吧" class="headerlink" title="先弄个ES6吧"></a>先弄个ES6吧</h3><p>以下进入正题，首先从package.json文件开始吧，先看一下需要什么npm包能够用ES6把vue写起来：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;vue-webpack&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</div><div class="line">    &quot;dev&quot;: &quot;webpack&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;author&quot;: &quot;&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;,</div><div class="line">  &quot;devDependencies&quot;: &#123;</div><div class="line">    &quot;babel-core&quot;: &quot;^6.11.4&quot;,</div><div class="line">    &quot;babel-loader&quot;: &quot;^6.2.4&quot;,</div><div class="line">    &quot;babel-preset-es2015&quot;: &quot;^6.9.0&quot;,</div><div class="line">    &quot;webpack&quot;: &quot;^1.13.1&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;vue&quot;: &quot;^1.0.26&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>我们除了使用babel-core和babel-loader外，还要使用babel-preset-es2015，因为在babel 6之后，默认没有指定转换的js版本，所以这里跑了webpack之后是不会将ES6代码转换的，如果需要转换ES2015，即需要安装多这个包。再写好webpack.config.js后，我们就可以愉快地开始coding了：</p>
@@ -185,37 +183,27 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">var path = require(&apos;path&apos;);</div><div class="line">module.exports = &#123;</div><div class="line">    entry: &quot;./src/entry.js&quot;,</div><div class="line">    output: &#123;</div><div class="line">        path: &apos;./static&apos;,</div><div class="line">        publicPath: &apos;/static/&apos;,</div><div class="line">        filename: &apos;main.js&apos;</div><div class="line">    &#125;,</div><div class="line">    module: &#123;</div><div class="line">        loaders: [</div><div class="line">            &#123;</div><div class="line">                test: /\.vue$/,</div><div class="line">                loader: &apos;vue&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                test: /\.scss$/,</div><div class="line">                loaders: [&quot;style&quot;, &quot;css&quot;, &quot;sass&quot;] </div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                test: /\.js$/,</div><div class="line">                loader: &apos;babel&apos;,</div><div class="line">                exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,</div><div class="line">                query: &#123;</div><div class="line">                    // since babel 6 needs preset to determin what to transform</div><div class="line">                    presets: [&apos;es2015&apos;]</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    resolve: &#123;</div><div class="line">        root: [path.resolve(__dirname, &quot;./src&quot;)]</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    devtool: &apos;#source-map&apos;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>最终骨架效果如下：</p>
 <p><img src="/images/amazeui.png" alt="图片"></p>
-<p>代码在这里：<a href="https://github.com/plusice/vue-app" target="_blank" rel="external">点击跳转</a>，持续更新中…</p>
+<p>代码在这里：<a href="https://github.com/plusice/vue-app" target="_blank" rel="external">点击跳转</a></p>
 <p>最近添加了些组件：<a href="https://plusice.github.io/vue-app/" target="_blank" rel="external">demo</a></p>
 
       
 
       
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
     </div>
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端工程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -290,8 +278,8 @@
     </a>
   
   
-    <a href="/2016/02/24/2015-08-21-inline-block/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">从inline-block到line-height到vertical-align</div>
+    <a href="/2016/01/28/2016-01-28-left-gulp-grunt-for-npm/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">［译］为什么我弃用gulp和grunt而用npm</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -357,6 +345,8 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
       
     
       
+      
+      
     
       
     
@@ -366,9 +356,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
     
     
       
-      <li style="width: 100%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
       
         
       
@@ -389,6 +381,46 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端性能</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">angular</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端工程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">后端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">移动前端</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -433,6 +465,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
     	</section>
     
 
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>博客主题hexo-theme-yilia</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
     
 
     

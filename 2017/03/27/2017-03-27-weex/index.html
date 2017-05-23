@@ -9,6 +9,7 @@
   <title>Weex开发环境搭建与集成到已有应用 | plusice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="虽然我本来是很排斥这种试用了某个技术然后就写一篇博客的行为，但无奈这次试用weex的过程中确实遇到了挺多问题，所以在此记录下来，或许可以帮到一些人。weex的文档其实已经做的挺不错了，所以很多内容都可以参考文档（可能是文档频繁的完善更新，地址都换了几次了）。 1.什么是Weex很多人都应该知道了weex是个什么东西，但语文老师教导我们写好一篇作文最基本的要有一个好的结构，所以还是废话几句介绍一下，">
+<meta name="keywords" content="vue,移动前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Weex开发环境搭建与集成到已有应用">
 <meta property="og:url" content="http://yoursite.com/2017/03/27/2017-03-27-weex/index.html">
@@ -17,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/images/weex-xcode.png">
 <meta property="og:image" content="http://yoursite.com/images/weex-xcode2.png">
 <meta property="og:image" content="http://yoursite.com/images/weex-xcode3.png">
-<meta property="og:updated_time" content="2017-05-22T11:27:38.000Z">
+<meta property="og:updated_time" content="2017-05-23T12:00:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Weex开发环境搭建与集成到已有应用">
 <meta name="twitter:description" content="虽然我本来是很排斥这种试用了某个技术然后就写一篇博客的行为，但无奈这次试用weex的过程中确实遇到了挺多问题，所以在此记录下来，或许可以帮到一些人。weex的文档其实已经做的挺不错了，所以很多内容都可以参考文档（可能是文档频繁的完善更新，地址都换了几次了）。 1.什么是Weex很多人都应该知道了weex是个什么东西，但语文老师教导我们写好一篇作文最基本的要有一个好的结构，所以还是废话几句介绍一下，">
@@ -62,8 +63,6 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
-	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -72,6 +71,8 @@
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -110,8 +111,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -128,9 +127,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -158,7 +155,7 @@
 
         
         <a href="/2017/03/27/2017-03-27-weex/" class="archive-article-date">
-  	<time datetime="2017-03-27T11:48:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-27</time>
+  	<time datetime="2017-03-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-27</time>
 </a>
         
       </header>
@@ -172,6 +169,7 @@
 <p>weex是一套构建高性能、可扩展的原生应用跨平台开发方案。与 Web App、HTML5 App 或 hybrid App 不同，您可以使用 Weex 构建一个真正的原生应用。更贴心的是你的代码只需使用 HTML、CSS、JavaScript 可以构建原生应用，上手非常简单。但实际上，应用的底层是 Objective-C 或 Java， 同时，Weex 提供很多 native 组件或模块供开发人员使用。</p>
 </blockquote>
 <p>它的原理文档也有<a href="https://weex.incubator.apache.org/cn/guide/intro/how-it-works.html" target="_blank" rel="external">介绍</a>，简单来说就是WeexSDK使用一个javascript引擎执行你的前端代码（JSBundle），然后再通过JSBridge与native端进行交互，进行native的渲染等操作。</p>
+<a id="more"></a>
 <h3 id="2-搭建开发环境"><a href="#2-搭建开发环境" class="headerlink" title="2.搭建开发环境"></a>2.搭建开发环境</h3><p>开发环境的搭建还是比较简单的，如果想先看到weex实现的demo，可以先来一个<a href="http://dotwe.org/vue/4d5a0471ece3daabd4681bc6d703c4c1" target="_blank" rel="external">Hello World</a>，你可以使用vue在线编辑，实现你想实现的功能，然后给手机安装<a href="https://alibaba.github.io/weex/download.html" target="_blank" rel="external">Playground App</a>（App Store也有），用Playground扫码体验一下native流畅的原生体验。</p>
 <p>开发环境的搭建只要参考文档相信就可以顺利完成（就是装Node.js和weex-toolkit），不过这里有个小坑要注意，就是Node.js的版本不能过低，不然后面构建项目会出错，如果不知道是否过低就把版本设置到文档使用的版本以上吧（可以使用nvm）。</p>
 <p>安装完weex后，终端执行<code>weex init dir</code>命令在dir目录中就创建了一个使用 Weex 和 Vue 的模板项目。项目中已经为我们配置好了几个npm script，运行<code>npm run dev</code> 和 <code>npm run serve</code>在浏览器上进入<code>http://localhost:8080/index.html</code>就可以看到 weex h5 页面。页面附带一个二维码，我们可以通过Playground扫码再次体验一下native流畅的原生体验。不过注意手机必须和开启服务的电脑在同一局域网。</p>
@@ -193,31 +191,25 @@
       
 
       
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
     </div>
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">移动前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -283,8 +275,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2016/10/11/2016-10-11-mock-data/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">前端开发中如何优雅地模拟数据</div>
+    <a href="/2016/11/17/2016-11-17-python-for-javascript-developer/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">［译］给Javascript开发者的Python指南</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -350,6 +342,8 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
       
     
       
+      
+      
     
       
     
@@ -359,9 +353,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
     
     
       
-      <li style="width: 100%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
       
         
       
@@ -382,6 +378,46 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端性能</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">angular</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端工程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">后端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">移动前端</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -426,6 +462,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
     	</section>
     
 
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>博客主题hexo-theme-yilia</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
     
 
     

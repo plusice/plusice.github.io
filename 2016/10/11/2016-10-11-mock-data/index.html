@@ -16,7 +16,7 @@
 <meta property="og:description" content="前端发展至今，开发中基本上都是和后端分离的，与后端无关的功能我们可以自己开发，但涉及到与后端数据交互相关的功能，没有了后端的配合，我们就需要自己动手了。这里就主要介绍几种我工作中使用到的方法，用来模拟后端返回的数据。 1.代理工具使用一些代理工具，我们可以将浏览器的请求拦截并返回其他内容。通常的做法是将请求映射到本地文件，返回请求时返回文件内容，例如配置 test.com/ 映射到本地目录 /te">
 <meta property="og:image" content="http://yoursite.com/images/mock-data-1.png">
 <meta property="og:image" content="http://yoursite.com/images/mock-data-2.png">
-<meta property="og:updated_time" content="2017-05-22T11:27:38.000Z">
+<meta property="og:updated_time" content="2017-05-23T12:02:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端开发中如何优雅地模拟数据">
 <meta name="twitter:description" content="前端发展至今，开发中基本上都是和后端分离的，与后端无关的功能我们可以自己开发，但涉及到与后端数据交互相关的功能，没有了后端的配合，我们就需要自己动手了。这里就主要介绍几种我工作中使用到的方法，用来模拟后端返回的数据。 1.代理工具使用一些代理工具，我们可以将浏览器的请求拦截并返回其他内容。通常的做法是将请求映射到本地文件，返回请求时返回文件内容，例如配置 test.com/ 映射到本地目录 /te">
@@ -61,8 +61,6 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
-	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -71,6 +69,8 @@
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -109,8 +109,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -127,9 +125,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -157,7 +153,7 @@
 
         
         <a href="/2016/10/11/2016-10-11-mock-data/" class="archive-article-date">
-  	<time datetime="2016-10-11T15:25:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-11</time>
+  	<time datetime="2016-10-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-11</time>
 </a>
         
       </header>
@@ -170,6 +166,7 @@
 <li>fiddler＋willow，for windows</li>
 <li>charles/wireshark，for mac/linux</li>
 </ul>
+<a id="more"></a>
 <p>这里以charles为例介绍一下其用法，其实很简单，打开tools =&gt; Map Local，然后按下图这样配置好映射就可以了：</p>
 <p><img src="/images/mock-data-1.png" alt="图片"></p>
 <p>上面的配置是直接映射到某个文件，也可以配置 test/* 映射到本地 /test/目录，这样会根据后面的具体路径去本地寻找映射文件。但是我们还需要重置返回的http编码头域，不然可能会出现乱码，打开tools=&gt;rewrite，按照下图配置即可：</p>
@@ -188,27 +185,6 @@
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -278,11 +254,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/03/27/2017-03-27-weex/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/11/17/2016-11-17-python-for-javascript-developer/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Weex开发环境搭建与集成到已有应用
+          ［译］给Javascript开发者的Python指南
         
       </div>
     </a>
@@ -355,6 +331,8 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
       
     
       
+      
+      
     
       
     
@@ -364,9 +342,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
     
     
       
-      <li style="width: 100%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
       
         
       
@@ -387,6 +367,46 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端性能</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">angular</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端工程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">后端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">移动前端</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -431,6 +451,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
     	</section>
     
 
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>博客主题hexo-theme-yilia</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
     
 
     
