@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2016/7 | plusice</title>
+  <title>小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限 | plusice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="plusice">
-<meta property="og:url" content="http://yoursite.com/archives/2016/07/index.html">
+  <meta name="description" content="虽然之前用过Linux，但在日常使用过程中发现还是有些东西没有了解，所以最近花了些时间看了《鸟哥的linux私房菜》（基础学习篇）一书。作为一个前端一般不需要掌握的太多，在这里把一些我认为比较重要的内容做下笔记。本篇为笔记第一篇，关于磁盘分区和文件权限。">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限">
+<meta property="og:url" content="http://yoursite.com/2017/06/04/linux笔记1/index.html">
 <meta property="og:site_name" content="plusice">
+<meta property="og:description" content="虽然之前用过Linux，但在日常使用过程中发现还是有些东西没有了解，所以最近花了些时间看了《鸟哥的linux私房菜》（基础学习篇）一书。作为一个前端一般不需要掌握的太多，在这里把一些我认为比较重要的内容做下笔记。本篇为笔记第一篇，关于磁盘分区和文件权限。">
+<meta property="og:image" content="http://yoursite.com/images/linux1-1.png">
+<meta property="og:updated_time" content="2017-06-10T09:13:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="plusice">
+<meta name="twitter:title" content="小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限">
+<meta name="twitter:description" content="虽然之前用过Linux，但在日常使用过程中发现还是有些东西没有了解，所以最近花了些时间看了《鸟哥的linux私房菜》（基础学习篇）一书。作为一个前端一般不需要掌握的太多，在这里把一些我认为比较重要的内容做下笔记。本篇为笔记第一篇，关于磁盘分区和文件权限。">
+<meta name="twitter:image" content="http://yoursite.com/images/linux1-1.png">
   
     <link rel="alternative" href="/atom.xml" title="plusice" type="application/atom+xml">
   
@@ -133,60 +140,156 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-linux笔记1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/23/2016-07-23-webpack-vue/" class="archive-article-date">
-  	<time datetime="2016-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/23/2016-07-23-webpack-vue/">实战webpack+vue</a>
+    <h1 class="article-title" itemprop="name">
+      小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/06/04/linux笔记1/" class="archive-article-date">
+  	<time datetime="2017-06-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>虽然之前用过Linux，但在日常使用过程中发现还是有些东西没有了解，所以最近花了些时间看了《鸟哥的linux私房菜》（基础学习篇）一书。作为一个前端一般不需要掌握的太多，在这里把一些我认为比较重要的内容做下笔记。本篇为笔记第一篇，关于磁盘分区和文件权限。</p>
+<a id="more"></a>
+<h3 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h3><p>硬盘的读写是以扇区为基本单位的。整块磁盘的第一个扇区（一个扇区512字节）很重要，记录了一个主引导分区（master boot record），可以安装引导加载程序的地方，有446字节；还有分区表，记录整块磁盘分区的状态，有64字节。主引导分区很重要，系统在开机的时候会主动读取这块内容才知道程序放在哪里要怎么开机。</p>
+<p>分区表对磁盘进行分区，记录了分区的起始与结束的柱面号码（分区最小单位为柱面），64字节的容量最多只写入四组分区信息。但是，利用额外的扇区来记录更多的分区信息，可以切割出更多的分区（逻辑分区）。</p>
+<p>操作系统会控制硬件，读取硬盘的软件执行软件，但是操作系统这个软件又是怎么被执行的呢？BIOS是写入到主板上的一个软件，会找到硬盘里的主引导分区的引导加载程序，加载程序执行读取操作系统内核文件然后就跑起来了。引导加载程序是操作系统安装时提供的。</p>
+<h3 id="文件目录与目录树挂载"><a href="#文件目录与目录树挂载" class="headerlink" title="文件目录与目录树挂载"></a>文件目录与目录树挂载</h3><p>Linux内的所有数据都是以文件形态呈现的，所以，整个Linux系统最重要的就在于目录树结构。目录树结构以根目录为主，所有文件都是在根目录下（目录也是一种文件），系统找到某个文件就是通过根目录下去寻找到的。分区和目录树的关系通过挂载联系起来，所谓的“挂载”就是利用一个目录当作进入点，将磁盘分区的数据放置在该目录下，也就是进入该目录就可以读取该分区的意思。所以当你为你的主机新加一块硬盘后，需要通过挂载操作才能访问到里面的内容（当然分区的文件系统得是系统支持的）。根目录一定要挂载到某个分区，其他目录可根据用户自己需求挂载到不同分区。</p>
+<h3 id="Linux文件系统概述"><a href="#Linux文件系统概述" class="headerlink" title="Linux文件系统概述"></a>Linux文件系统概述</h3><h4 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h4><p>Linux的所有文件（目录也是一种文件）有“User，Group，Other”三种身份属性，一个User可能属于多个Group，记录了该文件的所属用户、所属组和其他用户对该文件拥有的权限rwx（读写执行）权限。终端输入<code>ls -al</code>可以列出目录下文件和信息（-a是all，-l是long，表示长串信息）。套用鸟哥的一个图，列出的读写信息如下所示：</p>
+<p><img src="/images/linux1-1.png" alt="图片"><br>（图中档案类型也就是文件类型，可能是目录文件（d）或者文件(-)）</p>
+<p>需要注意的是，有了文件的写权限并没有删除文件的权限，删除文件的权限是文件所在目录的写权限，所以拥有了某个目录的写权限才可以对目录下文件进行增删和修改文件名。而拥有目录执行权限才可以让用户进入目录当成工作目录，而目录读权限可以读取目录下文件信息。</p>
+<p>改变文件属性与权限命令：chgrp命令改变文件所属用户组；chown改变文件所有者；chmod改变文件的权限。</p>
+<h4 id="系统几个主要的目录"><a href="#系统几个主要的目录" class="headerlink" title="系统几个主要的目录"></a>系统几个主要的目录</h4><ul>
+<li>/usr（UNIX software resource）：与软件安装与执行有关，放置“UNIX系统软件资源”，包括系统默认自带的软件</li>
+<li>/var（variable）：与系统运作过程有关，针对常态性变动的文件，包括缓存、登陆文件以及软件运行时产生的文件</li>
+<li>/bin：系统和用户很多执行文件的放置目录，与/usr/bin几乎是一样的，许多distribution课呢呢个/bin是/usr/bin的一个符号连接</li>
+<li>/etc：系统主要的配置文件</li>
+<li>/opt：第三方如软件放置的目录</li>
+<li>/usr/local，在你安装完了Linux之后，基本上所有的配备你都有了，但你可以安装其他软件。系统管理员在本机自行安装自己下载的软件，一般安装到此目录。同时，安装完毕之后所得到的执行档，为了与系统原先的执行档有分别，这些软件的执行档通常摆在/usr/local/bin这个地方。</li>
+</ul>
+<p>书上关于磁盘分区与文件权限与目录的重要（也是基础）内容就是这些，下一篇记录一下文件的常见操作与文件系统（Ext2）。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端工程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/04/linux笔记1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/10/linux笔记2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          小前端的linux私房菜读书笔记（二）——Linux常见文件操作与文件系统
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/03/27/2017-03-27-weex/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Weex开发环境搭建与集成到已有应用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -209,8 +312,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

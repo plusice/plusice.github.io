@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2016/7 | plusice</title>
+  <title>小前端的linux私房菜读书笔记（二）——Linux常见文件操作与文件系统 | plusice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="plusice">
-<meta property="og:url" content="http://yoursite.com/archives/2016/07/index.html">
+  <meta name="description" content="文件操作关于文件的操作这里只列出一些基础的命令，不做详细介绍，有需要用到的再去查详细用法即可。  文件目录管理命令： ls，查看目录下文件，-a查看全部，-l查看完整信息 复制、删除、移动：cp，rm，mv。如果不带任何参数，cp命令默认复制的文件的所有者何权限会被改变，通常复制的目的文件所有者是命令操作者本身。这时候要“cp -a”才可以把文件所有特性复制过来。另外scp命令可以通过ip把文件复">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小前端的linux私房菜读书笔记（二）——Linux常见文件操作与文件系统">
+<meta property="og:url" content="http://yoursite.com/2017/06/10/linux笔记2/index.html">
 <meta property="og:site_name" content="plusice">
+<meta property="og:description" content="文件操作关于文件的操作这里只列出一些基础的命令，不做详细介绍，有需要用到的再去查详细用法即可。  文件目录管理命令： ls，查看目录下文件，-a查看全部，-l查看完整信息 复制、删除、移动：cp，rm，mv。如果不带任何参数，cp命令默认复制的文件的所有者何权限会被改变，通常复制的目的文件所有者是命令操作者本身。这时候要“cp -a”才可以把文件所有特性复制过来。另外scp命令可以通过ip把文件复">
+<meta property="og:updated_time" content="2017-06-10T09:51:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="plusice">
+<meta name="twitter:title" content="小前端的linux私房菜读书笔记（二）——Linux常见文件操作与文件系统">
+<meta name="twitter:description" content="文件操作关于文件的操作这里只列出一些基础的命令，不做详细介绍，有需要用到的再去查详细用法即可。  文件目录管理命令： ls，查看目录下文件，-a查看全部，-l查看完整信息 复制、删除、移动：cp，rm，mv。如果不带任何参数，cp命令默认复制的文件的所有者何权限会被改变，通常复制的目的文件所有者是命令操作者本身。这时候要“cp -a”才可以把文件所有特性复制过来。另外scp命令可以通过ip把文件复">
   
     <link rel="alternative" href="/atom.xml" title="plusice" type="application/atom+xml">
   
@@ -133,60 +138,163 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-linux笔记2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/23/2016-07-23-webpack-vue/" class="archive-article-date">
-  	<time datetime="2016-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/23/2016-07-23-webpack-vue/">实战webpack+vue</a>
+    <h1 class="article-title" itemprop="name">
+      小前端的linux私房菜读书笔记（二）——Linux常见文件操作与文件系统
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/06/10/linux笔记2/" class="archive-article-date">
+  	<time datetime="2017-06-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>关于文件的操作这里只列出一些基础的命令，不做详细介绍，有需要用到的再去查详细用法即可。</p>
+<ul>
+<li>文件目录管理命令：<ul>
+<li>ls，查看目录下文件，-a查看全部，-l查看完整信息</li>
+<li>复制、删除、移动：cp，rm，mv。如果不带任何参数，cp命令默认复制的文件的所有者何权限会被改变，通常复制的目的文件所有者是命令操作者本身。这时候要“cp -a”才可以把文件所有特性复制过来。另外scp命令可以通过ip把文件复制到另外一台机器上。</li>
+</ul>
+</li>
+<li>文件内容查询命令：<ul>
+<li>cat（concatenate）：由第一行开始显示文件内容</li>
+<li>head：只看头几行</li>
+<li>tail：只看结尾几行</li>
+<li>more：一页一页显示内容</li>
+<li>touch：修改文件时间或者创建新文件</li>
+</ul>
+</li>
+<li>权限与命令间关系：<ul>
+<li>让用户进入某目录成为“可工作目录”（例如在目录下使用一些命令），用户至少需要有x权限。</li>
+<li>让用户创建一个文件，用户至少需要在文件所在目录具有对目录的w限（x权限更是基本的）</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="文件系统Ext2"><a href="#文件系统Ext2" class="headerlink" title="文件系统Ext2"></a>文件系统Ext2</h3><p>操作系统要操作磁盘分区上的文件，需要将分区格式化成操作系统能够利用的文件系统格式。Linux的Ext2文件系统是索引式文件系统，每个block通过inode索引（记录block号码）。以下是Ext2文件系统的三个数据：</p>
+<ul>
+<li>super block：记录此文件系统的整体信息，包括inode或block总量、使用量、剩余量等信息；（df查看文件系统的整体磁盘使用量，就是从super block获取信息）</li>
+<li>inode：记录文件属性，一个文件占用一个inode，同时记录此文件的数据所在的block号码（可能有多个）；</li>
+<li>block：实际记录文件内容，文件太大可能占用多个block。Ext2支持的一个block大小有1kb，2kb和4kb三种。</li>
+</ul>
+<h5 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h5><p>每个inode大小固定为128bytes，每个文件只占用一个inode，除了记录文件属性，还要记录block号码。inode记录一个block号码要花掉4bytes，如果一个文件block太多，需要通过间接记录区来记录。所谓的间接就是再拿一个block来当作记录block号码的记录区。此外还有双间接和三间接。</p>
+<h5 id="目录树与inode关系"><a href="#目录树与inode关系" class="headerlink" title="目录树与inode关系"></a>目录树与inode关系</h5><p>新建一个目录时，ext2会分配一个inode和至少一块block给该目录（记住目录也是一种文件），其中inode记录目录权限与属性，并可以记录分配到的那个block号码，而block则记录这个目录下的文件名和该文件名占用的inode号码数据。<br>上面所说可以知道目录inode本身不记录文件名而是记录在block，所以文件的增删改与目录的w权限有关。另外可以看到我们是通过目录下的文件名来定位到该文件的inode。</p>
+<h5 id="Ext3的日志文件系统"><a href="#Ext3的日志文件系统" class="headerlink" title="Ext3的日志文件系统"></a>Ext3的日志文件系统</h5><p>上面说过super block用于记录文件系统的整体信息。但如果断电什么的原因，可能导致super block的记录的数据和真实的文件数据不一致（写了block和inode，但还没有更新block数量等信息到superblock）。<br>ext2在系统重启时会通过搜寻整个文件系统来做检测进行数据一致性检查，但很明显这很费时。ext3在文件系统划出一个块用于记录写入或修订文件时的步骤（日志），这样通过检查日志就可以知道哪里有问题了。</p>
+<h3 id="连接文件：ln"><a href="#连接文件：ln" class="headerlink" title="连接文件：ln"></a>连接文件：ln</h3><p>Linux的连结文件有两种，一种是类似Windows的快捷方式功能的文件，可以让你快速的链接到目标文件(或目录)； 另一种则是透过文件系统的 inode连结来产生新档名，而不是产生新文件！这种称为实体链接 (hard link)。</p>
+<h5 id="hard-link"><a href="#hard-link" class="headerlink" title="hard link"></a>hard link</h5><p>只是在某个目录下新建一条文件名连接到某inode号码的关联记录，也就是说可以有两个文件名连接到同一inode，两个文件名的所有相关信息会一模一样（除了文件名）。ln命令不加参数默认就是硬连接，删除一个“文件名”另一个没有影响，不能垮文件系统，也不能连接到目录，连接到目录会造成很大的复杂度。</p>
+<h5 id="symbolic-link（符号连接，也是快捷方式）"><a href="#symbolic-link（符号连接，也是快捷方式）" class="headerlink" title="symbolic link（符号连接，也是快捷方式）"></a>symbolic link（符号连接，也是快捷方式）</h5><p>基本上就是创建一独立文件，有独立的inode。文件记录了目标文件的完整文件名（从根目录下来的完整路径），文件数据的读取指向目标文件的文件名（不是inode），而通过目标文件文件名就可以拿到该文件的inode进而拿到文件数据。ln命令加上-s参数创建的连接就是符号连接，符号连接限制较少所以使用更广。</p>
+<p>以上，下一篇记录bash的使用。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端工程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/10/linux笔记2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/06/04/linux笔记1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -209,8 +317,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
