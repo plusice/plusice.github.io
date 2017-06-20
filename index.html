@@ -135,6 +135,130 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux笔记4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/20/linux笔记4/">小前端的linux私房菜读书笔记（四）——一些常用命令</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/20/linux笔记4/" class="archive-article-date">
+  	<time datetime="2017-06-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是linux笔记系列文章的最后一篇了。本来还是有一些内容的，但发现平常都很少用到，例如系统工作调度、系统账号管理、系统服务等，所以这些就不做记录了。<br>而shell脚本的内容，也是用到了再去查就行，语法跟其他语言类似，主要还是要掌握常用命令的使用。最后一篇就记录一些常用命令。</p>
+<ul>
+<li><p>删除文件夹：<code>rm -rf path/to/</code></p>
+</li>
+<li><p>修改文件【拥有者|用户组|其他用户】权限：</p>
+<ul>
+<li><code>chmod 764 path/to</code> 表示使path/to目录的所有者：7（111，读写执行权限），组用户：6（110，读写），其他用户：4（100，读）</li>
+<li><code>chmod +r</code> 表示增加读权限，+w加写，+x加执行。-r对应减去。可以直接<code>chmod +rwx</code>。对所有用户加读写执行权限：<code>chmod a+rwx path/to/file</code></li>
+<li>上面只是指定目录或文件，而子目录没有修改，修改子目录要添加 -R（Recursively，注意大写）参数，表示递归所有子目录。跟<code>rm -rf ./</code>的-r一样作用。</li>
+</ul>
+</li>
+<li><p>查看某个命令的绝对路径：<code>which [命令]</code></p>
+</li>
+<li><p>建立连接文件：</p>
+<ul>
+<li>软连接：<code>ln -s path/source path/dist</code>，在当前目录下建立一个链接path/dist，指向path/source。</li>
+<li>硬链接：<code>ln path/source path/dist</code></li>
+</ul>
+</li>
+<li><p>筛选grep：grep可以使用正则表达式搜索文本，并且将匹配的行打印出来</p>
+</li>
+<li><p>管道符：“|”将两个命令分开，前一个的命令输出会成为后面一个命令的输入（标准输入stdin）。常用<code>[命令] | grep</code> 将第一个命令输出的内容通过grep命令过滤某些字符输出。注意有一些命令例如ls命令期待的是命令行参数不是标准输入，所以不能用<code>ls | ls</code>，要用<code>ls | xargs ls</code></p>
+</li>
+<li><p>xargs，从标准输入重建并执行命令行，标准输入转成命令参数。</p>
+</li>
+<li><p>流操作</p>
+<ul>
+<li><code>&gt;</code>表示重定向，是将上一个的标准输出定位到另一个标准输出，或者一个文件。</li>
+<li><code>&gt;&gt;</code>表示追加，是在不改变后面文件内容的前提下，在文件末尾添加前面的输出。</li>
+</ul>
+</li>
+<li><p>查看文件内容</p>
+<ul>
+<li>tail，输出文件倒数n行的内容。加上<code>-f</code>参数tail命令会持续显示添加到文件中的行（例如写log），直到按下 Ctrl-C 来停止。</li>
+<li>cat，输出全部文件内容</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>ctrl+alt+（f1～f6）：打开tty1～tty6控制台，是控制台界面。而tty7是图形界面，ctrl+alt+f7打开。</p>
+</li>
+<li><p><code>ps aux</code>可以看到所有运行的程序，配合grep命令进行筛选。</p>
+</li>
+<li><p>kill命令杀死某个进程。图形界面卡死时，可以打开tty1终端，<code>ps -t -tty7</code>命令查看tty7进程，找到xorg进程到pid号xxx，kill xxx重启图形界面。</p>
+</li>
+<li><p>文件复制</p>
+<ul>
+<li>cp，<code>cp path/to/file1 path/to/file2</code>复制到某个文件（覆盖），<code>cp path/to/file path/to/</code>复制到某个目录。如果是拷一个目录，则要加上-r，例如<code>cp -r path/to1 path/to2/</code>。</li>
+<li>scp，cp的升级版 ，不同机器间的文件复制，<code>scp user@ip:/hisdir /mydir</code>。</li>
+</ul>
+</li>
+<li><p>显示目录下文件：<code>ls -al</code>，-a表示显示隐藏的，-l表示显示详细资料。</p>
+</li>
+<li><p>打补丁，patch命令用patch文件给文件打补丁，改变文件的内容。patch文件可用diff命令来取得。</p>
+</li>
+<li><p>man命令查看命令的说明，例如：<code>man cp</code>，查看cp命令说明。</p>
+</li>
+<li><p>显示当前路径：pwd</p>
+</li>
+<li><p>显示文件系统文件占用磁盘空间情况：df</p>
+</li>
+<li><p><code>netstat -nlp</code> 查看占用端口号的服务(mac的参数有些不一样，无法找到相关程序（-p），得用lsof命令：<code>lsof -nP -iTCP:[端口号]</code></p>
+</li>
+<li><p>top命令，是Linux下常用的性能分析工具 ，能够实时显示系统中各个进程的资源占用状况（内存和cpu等），类似于Windows的任务管理器。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/20/linux笔记4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-linux笔记3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -732,86 +856,6 @@
 
 
   
-    <article id="post-2015-11-30-angular2初试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/2015-11-30-angular2初试/">angular2初试</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/30/2015-11-30-angular2初试/" class="archive-article-date">
-  	<time datetime="2015-11-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>很久很久以前，就总是听人们在讨论着angular2（以下简称ng2，angualr1.x简称ng1），而今其beta版本已发布了好几个月，最近刚好有时间于是拿来试玩一下。</p>
-<h3 id="一-初代和二代的简单对比"><a href="#一-初代和二代的简单对比" class="headerlink" title="一.初代和二代的简单对比"></a>一.初代和二代的简单对比</h3><p>据说ng2是不兼容ng1的，有这么几点很大的不同：</p>
-<ul>
-<li>使用TypeScript编写</li>
-<li>没有Controllers</li>
-<li>没有双向数据绑定，不过ng2提供了强大的forms module提供类似功能</li>
-<li>组件化</li>
-<li>新的Router</li>
-<li>模块化</li>
-<li>没有$scope</li>
-<li>使用Tempate的错误提示</li>
-</ul>
-<p>所以剩下没变的，好像也就filters了。那为什么做这么大改变呢，ng2团队给出了解释，下面简单列一下：</p>
-<ul>
-<li><strong>性能限制</strong>：双向绑定和模板等性能问题</li>
-<li><strong>前端的快速发展</strong>：ES6标准的确定，组件化模块化的发展</li>
-<li><strong>移动端的需求</strong>：移动端要求的高性能ng1满足不了</li>
-<li><strong>易用性</strong>：ng1太复杂学习曲线太陡峭</li>
-</ul>
-<p>我对性能方面的考虑倒没那么多，而如果用在手机端可能也会先考虑reactjs。但是使用过ng2后，它的模块化组件化着实让我眼前一亮！和ng1那种糟糕的写法比起来简直就是：完美～！</p>
-        
-          <a class="article-more-a" href="/2015/11/30/2015-11-30-angular2初试/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">angular</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/30/2015-11-30-angular2初试/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -905,11 +949,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -917,11 +961,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端工程</a>
+                <a href="javascript:void(0)" class="js-tag color3">angular</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">angular</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端工程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -933,15 +977,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">移动前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
             
             <div class="clearfix"></div>

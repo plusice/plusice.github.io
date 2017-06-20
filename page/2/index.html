@@ -135,39 +135,48 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-2015-11-11-html渲染奥秘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-2015-11-30-angular2初试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/11/2015-11-11-html渲染奥秘/">html渲染奥秘</a>
+      <a class="article-title" href="/2015/11/30/2015-11-30-angular2初试/">angular2初试</a>
     </h1>
   
 
         
-        <a href="/2015/11/11/2015-11-11-html渲染奥秘/" class="archive-article-date">
-  	<time datetime="2015-11-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-11</time>
+        <a href="/2015/11/30/2015-11-30-angular2初试/" class="archive-article-date">
+  	<time datetime="2015-11-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在html5流行泛滥的今天,作为一个web前端,你应该已经写过了无数的动画效果,你或许也在你的css3动画中加上了translate3d,使得动画流畅,但究竟这个为什么能使动画流畅呢,还有其他的东西能影响到动画的性能,或者说网页渲染的性能呢?</p>
-<p><b>下面的内容将介绍页面渲染过程对性能是如何影响性能的:</b><br><em>内容基于 WebKit，更准确的说，是 WebKit 的 Chromium 分支,不过其他浏览器大体一致</em></p>
-<h3 id="一-一个html文档-从解析到屏幕"><a href="#一-一个html文档-从解析到屏幕" class="headerlink" title="一.一个html文档,从解析到屏幕"></a>一.一个html文档,从解析到屏幕</h3><p>一个html文档从解析到渲染到屏幕,大致上有以下几步:</p>
-<ol>
-<li>html文档生成DOM树</li>
-<li>CSS代码转化成CSSOM</li>
-<li>DOM+CSSOM生成渲染树</li>
-<li>根据渲染树上节点的位置大小等信息进行布局(layout)</li>
-<li>将布局绘制到bitmap上</li>
-<li>bitmap传输至GPU然后绘制到屏幕</li>
-</ol>
+        <p>很久很久以前，就总是听人们在讨论着angular2（以下简称ng2，angualr1.x简称ng1），而今其beta版本已发布了好几个月，最近刚好有时间于是拿来试玩一下。</p>
+<h3 id="一-初代和二代的简单对比"><a href="#一-初代和二代的简单对比" class="headerlink" title="一.初代和二代的简单对比"></a>一.初代和二代的简单对比</h3><p>据说ng2是不兼容ng1的，有这么几点很大的不同：</p>
+<ul>
+<li>使用TypeScript编写</li>
+<li>没有Controllers</li>
+<li>没有双向数据绑定，不过ng2提供了强大的forms module提供类似功能</li>
+<li>组件化</li>
+<li>新的Router</li>
+<li>模块化</li>
+<li>没有$scope</li>
+<li>使用Tempate的错误提示</li>
+</ul>
+<p>所以剩下没变的，好像也就filters了。那为什么做这么大改变呢，ng2团队给出了解释，下面简单列一下：</p>
+<ul>
+<li><strong>性能限制</strong>：双向绑定和模板等性能问题</li>
+<li><strong>前端的快速发展</strong>：ES6标准的确定，组件化模块化的发展</li>
+<li><strong>移动端的需求</strong>：移动端要求的高性能ng1满足不了</li>
+<li><strong>易用性</strong>：ng1太复杂学习曲线太陡峭</li>
+</ul>
+<p>我对性能方面的考虑倒没那么多，而如果用在手机端可能也会先考虑reactjs。但是使用过ng2后，它的模块化组件化着实让我眼前一亮！和ng1那种糟糕的写法比起来简直就是：完美～！</p>
         
-          <a class="article-more-a" href="/2015/11/11/2015-11-11-html渲染奥秘/#more">more >></a>
+          <a class="article-more-a" href="/2015/11/30/2015-11-30-angular2初试/#more">more >></a>
         
       
 
@@ -181,11 +190,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端性能</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">angular</a>
         		</li>
       		
 		</ul>
@@ -195,7 +200,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/11/2015-11-11-html渲染奥秘/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/30/2015-11-30-angular2初试/">展开全文 >></a>
         </p>
       
 
@@ -265,6 +270,81 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/11/2015-08-15-cors跨域options请求/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-2015-11-11-html渲染奥秘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/11/2015-11-11-html渲染奥秘/">html渲染奥秘</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/11/2015-11-11-html渲染奥秘/" class="archive-article-date">
+  	<time datetime="2015-11-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在html5流行泛滥的今天,作为一个web前端,你应该已经写过了无数的动画效果,你或许也在你的css3动画中加上了translate3d,使得动画流畅,但究竟这个为什么能使动画流畅呢,还有其他的东西能影响到动画的性能,或者说网页渲染的性能呢?</p>
+<p><b>下面的内容将介绍页面渲染过程对性能是如何影响性能的:</b><br><em>内容基于 WebKit，更准确的说，是 WebKit 的 Chromium 分支,不过其他浏览器大体一致</em></p>
+<h3 id="一-一个html文档-从解析到屏幕"><a href="#一-一个html文档-从解析到屏幕" class="headerlink" title="一.一个html文档,从解析到屏幕"></a>一.一个html文档,从解析到屏幕</h3><p>一个html文档从解析到渲染到屏幕,大致上有以下几步:</p>
+<ol>
+<li>html文档生成DOM树</li>
+<li>CSS代码转化成CSSOM</li>
+<li>DOM+CSSOM生成渲染树</li>
+<li>根据渲染树上节点的位置大小等信息进行布局(layout)</li>
+<li>将布局绘制到bitmap上</li>
+<li>bitmap传输至GPU然后绘制到屏幕</li>
+</ol>
+        
+          <a class="article-more-a" href="/2015/11/11/2015-11-11-html渲染奥秘/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端性能</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/11/2015-11-11-html渲染奥秘/">展开全文 >></a>
         </p>
       
 
@@ -560,11 +640,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,11 +652,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端工程</a>
+                <a href="javascript:void(0)" class="js-tag color3">angular</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">angular</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端工程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,15 +668,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">移动前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限 | plusice</title>
+  <title>小前端的linux私房菜读书笔记（四）——一些常用命令 | plusice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="虽然之前用过Linux，但在日常使用过程中发现还是有些东西没有了解，所以最近花了些时间看了《鸟哥的linux私房菜》（基础学习篇）一书。作为一个前端一般不需要掌握的太多，在这里把一些我认为比较重要的内容做下笔记。本篇为笔记第一篇，关于磁盘分区和文件权限。">
+  <meta name="description" content="这是linux笔记系列文章的最后一篇了。本来还是有一些内容的，但发现平常都很少用到，例如系统工作调度、系统账号管理、系统服务等，所以这些就不做记录了。而shell脚本的内容，也是用到了再去查就行，语法跟其他语言类似，主要还是要掌握常用命令的使用。最后一篇就记录一些常用命令。  删除文件夹：rm -rf path/to/  修改文件【拥有者|用户组|其他用户】权限：  chmod 764 path/">
 <meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限">
-<meta property="og:url" content="http://yoursite.com/2017/06/04/linux笔记1/index.html">
+<meta property="og:title" content="小前端的linux私房菜读书笔记（四）——一些常用命令">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/linux笔记4/index.html">
 <meta property="og:site_name" content="plusice">
-<meta property="og:description" content="虽然之前用过Linux，但在日常使用过程中发现还是有些东西没有了解，所以最近花了些时间看了《鸟哥的linux私房菜》（基础学习篇）一书。作为一个前端一般不需要掌握的太多，在这里把一些我认为比较重要的内容做下笔记。本篇为笔记第一篇，关于磁盘分区和文件权限。">
-<meta property="og:image" content="http://yoursite.com/images/linux1-1.png">
-<meta property="og:updated_time" content="2017-06-20T14:38:13.000Z">
+<meta property="og:description" content="这是linux笔记系列文章的最后一篇了。本来还是有一些内容的，但发现平常都很少用到，例如系统工作调度、系统账号管理、系统服务等，所以这些就不做记录了。而shell脚本的内容，也是用到了再去查就行，语法跟其他语言类似，主要还是要掌握常用命令的使用。最后一篇就记录一些常用命令。  删除文件夹：rm -rf path/to/  修改文件【拥有者|用户组|其他用户】权限：  chmod 764 path/">
+<meta property="og:updated_time" content="2017-06-20T15:39:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限">
-<meta name="twitter:description" content="虽然之前用过Linux，但在日常使用过程中发现还是有些东西没有了解，所以最近花了些时间看了《鸟哥的linux私房菜》（基础学习篇）一书。作为一个前端一般不需要掌握的太多，在这里把一些我认为比较重要的内容做下笔记。本篇为笔记第一篇，关于磁盘分区和文件权限。">
-<meta name="twitter:image" content="http://yoursite.com/images/linux1-1.png">
+<meta name="twitter:title" content="小前端的linux私房菜读书笔记（四）——一些常用命令">
+<meta name="twitter:description" content="这是linux笔记系列文章的最后一篇了。本来还是有一些内容的，但发现平常都很少用到，例如系统工作调度、系统账号管理、系统服务等，所以这些就不做记录了。而shell脚本的内容，也是用到了再去查就行，语法跟其他语言类似，主要还是要掌握常用命令的使用。最后一篇就记录一些常用命令。  删除文件夹：rm -rf path/to/  修改文件【拥有者|用户组|其他用户】权限：  chmod 764 path/">
   
     <link rel="alternative" href="/atom.xml" title="plusice" type="application/atom+xml">
   
@@ -140,50 +138,92 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-linux笔记1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-linux笔记4" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限
+      小前端的linux私房菜读书笔记（四）——一些常用命令
     </h1>
   
 
         
-        <a href="/2017/06/04/linux笔记1/" class="archive-article-date">
-  	<time datetime="2017-06-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-04</time>
+        <a href="/2017/06/20/linux笔记4/" class="archive-article-date">
+  	<time datetime="2017-06-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>虽然之前用过Linux，但在日常使用过程中发现还是有些东西没有了解，所以最近花了些时间看了《鸟哥的linux私房菜》（基础学习篇）一书。作为一个前端一般不需要掌握的太多，在这里把一些我认为比较重要的内容做下笔记。本篇为笔记第一篇，关于磁盘分区和文件权限。</p>
-<a id="more"></a>
-<h3 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h3><p>硬盘的读写是以扇区为基本单位的。整块磁盘的第一个扇区（一个扇区512字节）很重要，记录了一个主引导分区（master boot record），可以安装引导加载程序的地方，有446字节；还有分区表，记录整块磁盘分区的状态，有64字节。主引导分区很重要，系统在开机的时候会主动读取这块内容才知道程序放在哪里要怎么开机。</p>
-<p>分区表对磁盘进行分区，记录了分区的起始与结束的柱面号码（分区最小单位为柱面），64字节的容量最多只写入四组分区信息。但是，利用额外的扇区来记录更多的分区信息，可以切割出更多的分区（逻辑分区）。</p>
-<p>操作系统会控制硬件，读取硬盘的软件执行软件，但是操作系统这个软件又是怎么被执行的呢？BIOS是写入到主板上的一个软件，会找到硬盘里的主引导分区的引导加载程序，加载程序执行读取操作系统内核文件然后就跑起来了。引导加载程序是操作系统安装时提供的。</p>
-<h3 id="文件目录与目录树挂载"><a href="#文件目录与目录树挂载" class="headerlink" title="文件目录与目录树挂载"></a>文件目录与目录树挂载</h3><p>Linux内的所有数据都是以文件形态呈现的，所以，整个Linux系统最重要的就在于目录树结构。目录树结构以根目录为主，所有文件都是在根目录下（目录也是一种文件），系统找到某个文件就是通过根目录下去寻找到的。分区和目录树的关系通过挂载联系起来，所谓的“挂载”就是利用一个目录当作进入点，将磁盘分区的数据放置在该目录下，也就是进入该目录就可以读取该分区的意思。所以当你为你的主机新加一块硬盘后，需要通过挂载操作才能访问到里面的内容（当然分区的文件系统得是系统支持的）。根目录一定要挂载到某个分区，其他目录可根据用户自己需求挂载到不同分区。</p>
-<h3 id="Linux文件系统概述"><a href="#Linux文件系统概述" class="headerlink" title="Linux文件系统概述"></a>Linux文件系统概述</h3><h4 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h4><p>Linux的所有文件（目录也是一种文件）有“User，Group，Other”三种身份属性，一个User可能属于多个Group，记录了该文件的所属用户、所属组和其他用户对该文件拥有的权限rwx（读写执行）权限。终端输入<code>ls -al</code>可以列出目录下文件和信息（-a是all，-l是long，表示长串信息）。套用鸟哥的一个图，列出的读写信息如下所示：</p>
-<p><img src="/images/linux1-1.png" alt="图片"><br>（图中档案类型也就是文件类型，可能是目录文件（d）或者文件(-)）</p>
-<p>需要注意的是，有了文件的写权限并没有删除文件的权限，删除文件的权限是文件所在目录的写权限，所以拥有了某个目录的写权限才可以对目录下文件进行增删和修改文件名。而拥有目录执行权限才可以让用户进入目录当成工作目录，而目录读权限可以读取目录下文件信息。</p>
-<p>改变文件属性与权限命令：chgrp命令改变文件所属用户组；chown改变文件所有者；chmod改变文件的权限。</p>
-<p>普通用户获取root权限方法：</p>
+        <p>这是linux笔记系列文章的最后一篇了。本来还是有一些内容的，但发现平常都很少用到，例如系统工作调度、系统账号管理、系统服务等，所以这些就不做记录了。<br>而shell脚本的内容，也是用到了再去查就行，语法跟其他语言类似，主要还是要掌握常用命令的使用。最后一篇就记录一些常用命令。</p>
 <ul>
-<li>执行命令<code>su -</code>，然后输入root密码</li>
-<li>在执行的命令前加上<code>sudo</code>，然后输入自己的密码，这个只有特定用户可以使用</li>
+<li><p>删除文件夹：<code>rm -rf path/to/</code></p>
+</li>
+<li><p>修改文件【拥有者|用户组|其他用户】权限：</p>
+<ul>
+<li><code>chmod 764 path/to</code> 表示使path/to目录的所有者：7（111，读写执行权限），组用户：6（110，读写），其他用户：4（100，读）</li>
+<li><code>chmod +r</code> 表示增加读权限，+w加写，+x加执行。-r对应减去。可以直接<code>chmod +rwx</code>。对所有用户加读写执行权限：<code>chmod a+rwx path/to/file</code></li>
+<li>上面只是指定目录或文件，而子目录没有修改，修改子目录要添加 -R（Recursively，注意大写）参数，表示递归所有子目录。跟<code>rm -rf ./</code>的-r一样作用。</li>
 </ul>
-<h4 id="系统几个主要的目录"><a href="#系统几个主要的目录" class="headerlink" title="系统几个主要的目录"></a>系统几个主要的目录</h4><ul>
-<li>/usr（UNIX software resource）：与软件安装与执行有关，放置“UNIX系统软件资源”，包括系统默认自带的软件</li>
-<li>/var（variable）：与系统运作过程有关，针对常态性变动的文件，包括缓存、登陆文件以及软件运行时产生的文件</li>
-<li>/bin：系统和用户很多执行文件的放置目录，与/usr/bin几乎是一样的，许多distribution课呢呢个/bin是/usr/bin的一个符号连接</li>
-<li>/etc：系统主要的配置文件</li>
-<li>/opt：第三方如软件放置的目录</li>
-<li>/usr/local，在你安装完了Linux之后，基本上所有的配备你都有了，但你可以安装其他软件。系统管理员在本机自行安装自己下载的软件，一般安装到此目录。同时，安装完毕之后所得到的执行档，为了与系统原先的执行档有分别，这些软件的执行档通常摆在/usr/local/bin这个地方。</li>
+</li>
+<li><p>查看某个命令的绝对路径：<code>which [命令]</code></p>
+</li>
+<li><p>建立连接文件：</p>
+<ul>
+<li>软连接：<code>ln -s path/source path/dist</code>，在当前目录下建立一个链接path/dist，指向path/source。</li>
+<li>硬链接：<code>ln path/source path/dist</code></li>
 </ul>
-<p>书上关于磁盘分区与文件权限与目录的重要（也是基础）内容就是这些，下一篇记录一下文件的常见操作与文件系统（Ext2）。</p>
+</li>
+<li><p>筛选grep：grep可以使用正则表达式搜索文本，并且将匹配的行打印出来</p>
+</li>
+<li><p>管道符：“|”将两个命令分开，前一个的命令输出会成为后面一个命令的输入（标准输入stdin）。常用<code>[命令] | grep</code> 将第一个命令输出的内容通过grep命令过滤某些字符输出。注意有一些命令例如ls命令期待的是命令行参数不是标准输入，所以不能用<code>ls | ls</code>，要用<code>ls | xargs ls</code></p>
+</li>
+<li><p>xargs，从标准输入重建并执行命令行，标准输入转成命令参数。</p>
+</li>
+<li><p>流操作</p>
+<ul>
+<li><code>&gt;</code>表示重定向，是将上一个的标准输出定位到另一个标准输出，或者一个文件。</li>
+<li><code>&gt;&gt;</code>表示追加，是在不改变后面文件内容的前提下，在文件末尾添加前面的输出。</li>
+</ul>
+</li>
+<li><p>查看文件内容</p>
+<ul>
+<li>tail，输出文件倒数n行的内容。加上<code>-f</code>参数tail命令会持续显示添加到文件中的行（例如写log），直到按下 Ctrl-C 来停止。</li>
+<li>cat，输出全部文件内容</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>ctrl+alt+（f1～f6）：打开tty1～tty6控制台，是控制台界面。而tty7是图形界面，ctrl+alt+f7打开。</p>
+</li>
+<li><p><code>ps aux</code>可以看到所有运行的程序，配合grep命令进行筛选。</p>
+</li>
+<li><p>kill命令杀死某个进程。图形界面卡死时，可以打开tty1终端，<code>ps -t -tty7</code>命令查看tty7进程，找到xorg进程到pid号xxx，kill xxx重启图形界面。</p>
+</li>
+<li><p>文件复制</p>
+<ul>
+<li>cp，<code>cp path/to/file1 path/to/file2</code>复制到某个文件（覆盖），<code>cp path/to/file path/to/</code>复制到某个目录。如果是拷一个目录，则要加上-r，例如<code>cp -r path/to1 path/to2/</code>。</li>
+<li>scp，cp的升级版 ，不同机器间的文件复制，<code>scp user@ip:/hisdir /mydir</code>。</li>
+</ul>
+</li>
+<li><p>显示目录下文件：<code>ls -al</code>，-a表示显示隐藏的，-l表示显示详细资料。</p>
+</li>
+<li><p>打补丁，patch命令用patch文件给文件打补丁，改变文件的内容。patch文件可用diff命令来取得。</p>
+</li>
+<li><p>man命令查看命令的说明，例如：<code>man cp</code>，查看cp命令说明。</p>
+</li>
+<li><p>显示当前路径：pwd</p>
+</li>
+<li><p>显示文件系统文件占用磁盘空间情况：df</p>
+</li>
+<li><p><code>netstat -nlp</code> 查看占用端口号的服务(mac的参数有些不一样，无法找到相关程序（-p），得用lsof命令：<code>lsof -nP -iTCP:[端口号]</code></p>
+</li>
+<li><p>top命令，是Linux下常用的性能分析工具 ，能够实时显示系统中各个进程的资源占用状况（内存和cpu等），类似于Windows的任务管理器。</p>
+</li>
+</ul>
 
       
 
@@ -253,7 +293,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/04/linux笔记1/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/20/linux笔记4/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -267,18 +307,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/10/linux笔记2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          小前端的linux私房菜读书笔记（二）——Linux常见文件操作与文件系统
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/27/2017-03-27-weex/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Weex开发环境搭建与集成到已有应用</div>
+    <a href="/2017/06/11/linux笔记3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">小前端的linux私房菜读书笔记（三）——bash的使用</div>
       <i class="icon-circle-right"></i>
     </a>
   

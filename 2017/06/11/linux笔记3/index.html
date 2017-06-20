@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/11/linux笔记3/index.html">
 <meta property="og:site_name" content="plusice">
 <meta property="og:description" content="这篇笔记可能稍微琐碎一些，都是一些小的知识点。 狭义的shell是命令行方面的软件，包括这里要介绍的bash。广义的shell指能够操作应用程序的接口包括图形界面的软件。bin/bash是Linux默认的shell。 命令行模式通常我们称命令行模式为终端界面，linux默认情况下提供六个终端界面(tty1~tty6)来让用户登录，切换方式为：  Ctrl+Alt+[F1]~[F6]的组合按钮切换至">
-<meta property="og:updated_time" content="2017-06-13T15:27:21.000Z">
+<meta property="og:updated_time" content="2017-06-20T14:31:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小前端的linux私房菜读书笔记（三）——bash的使用">
 <meta name="twitter:description" content="这篇笔记可能稍微琐碎一些，都是一些小的知识点。 狭义的shell是命令行方面的软件，包括这里要介绍的bash。广义的shell指能够操作应用程序的接口包括图形界面的软件。bin/bash是Linux默认的shell。 命令行模式通常我们称命令行模式为终端界面，linux默认情况下提供六个终端界面(tty1~tty6)来让用户登录，切换方式为：  Ctrl+Alt+[F1]~[F6]的组合按钮切换至">
@@ -188,7 +188,7 @@
 <li><code>~/.bash_profile</code>或<code>~/.bash_login</code>或<code>~/.profile</code>，属于用户个人设置</li>
 </ul>
 <h5 id="non-login-shell"><a href="#non-login-shell" class="headerlink" title="non-login shell"></a>non-login shell</h5><p>取得bash接口不需要重复登录的举动，例如用图形界面登录Linux后，再以图形界面启动终端机，此时那个终端接口没有需要再次输入账号与密码。non-login shell只会读取<code>~/.bashrc</code>而已。</p>
-<p>source命令或小数点（.）可以将配置文件的内容读进目前的shell环境中。例如我们修改了<code>~/.bashrc</code>，那么不需要注销，用<code>source ~/.bashrc</code>就可以将刚才最新设置的内容读进目前的环境中。其实就是在当前bash进程执行了配置文件。</p>
+<p>source命令或小数点（.）可以将配置文件的内容读进目前的shell环境中。例如我们修改了<code>~/.bashrc</code>，那么不需要注销，用<code>source ~/.bashrc</code>就可以将刚才最新设置的内容读进目前的环境中。这个操作其实就是在当前bash进程执行了配置文件（配置文件相当一个shell脚本）。</p>
 
       
 
@@ -271,6 +271,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2017/06/20/linux笔记4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          小前端的linux私房菜读书笔记（四）——一些常用命令
+        
+      </div>
+    </a>
   
   
     <a href="/2017/06/10/linux笔记2/" id="article-nav-older" class="article-nav-link-wrap">
@@ -379,11 +388,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -391,11 +400,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端工程</a>
+                <a href="javascript:void(0)" class="js-tag color3">angular</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">angular</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端工程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -407,15 +416,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">移动前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
             
             <div class="clearfix"></div>
