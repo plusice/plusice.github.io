@@ -135,6 +135,57 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2017-10-22-nodejs-cluster" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/14/2017-10-22-nodejs-cluster/">nodejs cluster模块分析</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/14/2017-10-22-nodejs-cluster/" class="archive-article-date">
+  	<time datetime="2017-10-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近做了点nodejs项目，对nodejs的cluster怎么利用多进程处理请求产生了疑问，于是着手进行了研究，之后发现这其中竟大有文章！一切还是先从遥远的TCP说起吧。。。</p>
+<h2 id="TCP与Socket"><a href="#TCP与Socket" class="headerlink" title="TCP与Socket"></a>TCP与Socket</h2><p>说到TCP，相信很多人都相当了解了，大学已经教过，但是又相信有很多人也不是很了解，要不是当时没听，要不也可能是自身的编程能力不足以去实践相关内容，写到这我还特意去翻了一下大学的计算机网络教材，内容是很丰富的，但教人实践的内容还是太少了，里面的内容都把学生当成了有相当的Linux编程能力的人了，所以结果就是大部分只上了一年编程课刚学会几个Hello world程序的大二学生，听了这门课后一脸懵逼，即使记住了也因为没什么实践很快忘了，当年我就是这么懵逼过来的。<br>所以，扯了这些，结果是什么呢，结果就是我们要多动手！而要动手建立一条TCP连接可以用socket来实现，不过这里不是要说socket用法，只是来简单聊一聊他们之间的一点小联系，以便于理解后面的内容。</p>
+        
+          <a class="article-more-a" href="/2017/10/14/2017-10-22-nodejs-cluster/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/14/2017-10-22-nodejs-cluster/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-linux笔记4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -805,57 +856,6 @@
 
 
   
-    <article id="post-2016-01-27-chrome-highlighter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/27/2016-01-27-chrome-highlighter/">chrome文本高亮笔记插件</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/27/2016-01-27-chrome-highlighter/" class="archive-article-date">
-  	<time datetime="2016-01-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>好久没有写点东西了,最近天冷也懒了点.但不能就这么荒废了,安利一下前阵子写的一个chrome小插件</p>
-<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>使用evernote剪藏的时候发现并不是很好用,每次保存都会新建一个文章进行保存,而我的使用场景是,看到一段想保存的文字,选择保存,然后保存到同一个地方.因为剪藏不能满足,所以写了一个小插件.插件可对文本进行高亮,并且高亮的文本会保存到插件的弹出窗口中,使用者可进行编辑.效果可以看我github介绍:<a href="https://github.com/plusice/simple_note" target="_blank" rel="external">点击跳转</a></p>
-        
-          <a class="article-more-a" href="/2016/01/27/2016-01-27-chrome-highlighter/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/27/2016-01-27-chrome-highlighter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -949,11 +949,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -969,14 +969,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">后端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
@@ -986,6 +978,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">后端</a>
               </li>
             
             <div class="clearfix"></div>
