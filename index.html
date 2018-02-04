@@ -135,6 +135,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2018-01-03-nodejs-划重点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/03/2018-01-03-nodejs-划重点/">nodejs 从一小段代码划重点</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/03/2018-01-03-nodejs-划重点/" class="archive-article-date">
+  	<time datetime="2018-01-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这周给小组内部做了个关于node的小分享，在这里记录下来。因为很多是网上已经有的内容，这篇文章只是把ppt给搬了过来，列出重要的点，具体就不展开了。</p>
+<h2 id="一小段启动http服务的代码"><a href="#一小段启动http服务的代码" class="headerlink" title="一小段启动http服务的代码"></a>一小段启动http服务的代码</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">const http = require(‘http');</div><div class="line"></div><div class="line">const hostname = ‘127.0.0.1';</div><div class="line"></div><div class="line">const port = 1337;</div><div class="line"></div><div class="line">http.createServer((req, res) =&gt; &#123;</div><div class="line"></div><div class="line">  res.writeHead(200, &#123; 'Content-Type': 'text/plain' &#125;);</div><div class="line"></div><div class="line">  res.end('Hello World\n’);</div><div class="line"></div><div class="line">&#125;).listen(port, hostname, () =&gt; &#123;</div><div class="line">  console.log(`Server running at http://$&#123;hostname&#125;:$&#123;port&#125;/`);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="require-‘http’-是怎么工作的？"><a href="#require-‘http’-是怎么工作的？" class="headerlink" title="require(‘http’)是怎么工作的？"></a>require(‘http’)是怎么工作的？</h2><h3 id="node-js模块分类"><a href="#node-js模块分类" class="headerlink" title="node.js模块分类"></a>node.js模块分类</h3><ul>
+<li>builtin module: Node 中以 c++ 形式提供的模块，如 tcp_wrap、contextify 等<br>constants module: Node 中定义常量的模块，用来导出如 signal, openssl 库、 文件访问权限等常量的定义。如文件访问权限中的 O_RDONLY，O_CREAT、 signal 中的 SIGHUP，SIGINT 等</li>
+<li>native module: Node 中以 JavaScript 形式提供的模块，如 http,https,fs 等</li>
+<li>3rd-party module: 以上模块可以统称 Node 内建模块，除此之外为第三方模 块，典型的如 express 模块。</li>
+</ul>
+<p>对于 node 自身提供的模块，其实无论是native JS模块还是builtin C++模块，最终都在编译生成可执行文件时，嵌入到了ELF格式的二进制文件node里面。但是原生js模块代码只是保存在node_natives.h中的C++变量不会被编译。程序加载native JS模块会通过<code>node.cc::Binding(&quot;natives&quot;)</code>拿到模块代码，而加载C++模块则直接用<code>get_builtin_module</code>方法。参考下图：<br><img src="/images/node-load.png" alt=""></p>
+<h3 id="js模块加载"><a href="#js模块加载" class="headerlink" title="js模块加载"></a>js模块加载</h3><ol>
+<li>如果模块在缓存中，返回它的 exports 对象。</li>
+<li>如果是原生的模块，通过调用 NativeModule.require() 返回结果（process.binding(‘natives’)获取保存在node_natives.h中的原生js模块代码，再通过NativeModule.require进行compile。）。 </li>
+<li>否则，调用Module创建一个新的模块，并保存到缓存中。 </li>
+</ol>
+<p><code>NativeModule.require</code>重点代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">NativeModule.require = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">    <span class="comment">// …</span></div><div class="line">    <span class="keyword">const</span> cached = NativeModule.getCached(id);</div><div class="line">    <span class="keyword">if</span> (cached &amp;&amp; (cached.loaded || cached.loading)) &#123;</div><div class="line">      <span class="keyword">return</span> cached.exports;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// …</span></div><div class="line">    <span class="keyword">const</span> nativeModule = <span class="keyword">new</span> NativeModule(id);</div><div class="line"></div><div class="line">    nativeModule.cache();</div><div class="line">    nativeModule.compile();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> nativeModule.exports;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
+<h3 id="CommonJs几点注意项"><a href="#CommonJs几点注意项" class="headerlink" title="CommonJs几点注意项"></a>CommonJs几点注意项</h3><h4 id="同步加载同步执行"><a href="#同步加载同步执行" class="headerlink" title="同步加载同步执行"></a>同步加载同步执行</h4><p>nodejs中执行到require模块时用fs.readFileSync同步加载文件，加载完同步执行，如果有缓存则直接返回exports。然后继续执行主程序。</p>
+<h4 id="模块引用"><a href="#模块引用" class="headerlink" title="模块引用"></a>模块引用</h4><p>假设在模块main中require模块a，main模块拿到a模块的module.exports对象，如果是第一次加载则对象被缓存，下一次require(‘a’)就直接拿这个缓存。 所以如果引入一个模块后改变其中暴露的某个变量，那么在其他引入的地方获取到的变量值也会改变。</p>
+<h4 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h4><p>缓存机制还解决了循环引用的问题。从源码可以发现模块加载的时候执行的时候会先保存在cache中，所以当a引用b，而b又引用a的情况下，在b执行的时候a已经缓存起来了，所以b只会拿到a的模块缓存（a的exports对象），所以不会出现循环问题。</p>
+<h2 id="http是怎么工作的？"><a href="#http是怎么工作的？" class="headerlink" title="http是怎么工作的？"></a>http是怎么工作的？</h2><h3 id="http之事件"><a href="#http之事件" class="headerlink" title="http之事件"></a>http之事件</h3><p>EventEmitter使用观察者模式构建了一个事件处理器。允许我们注册一个或多个函数作为 listeners ，在特定的事件触发时调用。如下图：<br><img src="/images/node-event.png" alt=""></p>
+        
+          <a class="article-more-a" href="/2018/01/03/2018-01-03-nodejs-划重点/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/03/2018-01-03-nodejs-划重点/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-2017-10-22-nodejs-cluster" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -792,70 +860,6 @@
 
 
   
-    <article id="post-2016-01-28-left-gulp-grunt-for-npm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/28/2016-01-28-left-gulp-grunt-for-npm/">［译］为什么我弃用gulp和grunt而用npm</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/28/2016-01-28-left-gulp-grunt-for-npm/" class="archive-article-date">
-  	<time datetime="2016-01-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>| 原文：<a href="https://medium.com/@housecor/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8" target="_blank" rel="external">Why I Left Gulp and Grunt for npm Scripts</a></p>
-<p>我知道你们在想什么?什么鬼?!Gulp不是刚刚干掉了Grunt吗?为什么我们不能就这样维持一会呢?我知道,但是…</p>
-<p><strong>我发现Gulp和Grunt是没有必要的抽象,npm script更强大,并且通常更好用</strong></p>
-<h3 id="我们先从一个例子开始…"><a href="#我们先从一个例子开始…" class="headerlink" title="我们先从一个例子开始…"></a>我们先从一个例子开始…</h3>
-        
-          <a class="article-more-a" href="/2016/01/28/2016-01-28-left-gulp-grunt-for-npm/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端工程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/28/2016-01-28-left-gulp-grunt-for-npm/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -870,7 +874,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 plusice
+    		&copy; 2018 plusice
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -949,11 +953,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -969,6 +973,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">后端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
@@ -978,14 +990,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">后端</a>
               </li>
             
             <div class="clearfix"></div>

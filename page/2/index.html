@@ -135,6 +135,70 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2016-01-28-left-gulp-grunt-for-npm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/28/2016-01-28-left-gulp-grunt-for-npm/">［译］为什么我弃用gulp和grunt而用npm</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/28/2016-01-28-left-gulp-grunt-for-npm/" class="archive-article-date">
+  	<time datetime="2016-01-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>| 原文：<a href="https://medium.com/@housecor/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8" target="_blank" rel="external">Why I Left Gulp and Grunt for npm Scripts</a></p>
+<p>我知道你们在想什么?什么鬼?!Gulp不是刚刚干掉了Grunt吗?为什么我们不能就这样维持一会呢?我知道,但是…</p>
+<p><strong>我发现Gulp和Grunt是没有必要的抽象,npm script更强大,并且通常更好用</strong></p>
+<h3 id="我们先从一个例子开始…"><a href="#我们先从一个例子开始…" class="headerlink" title="我们先从一个例子开始…"></a>我们先从一个例子开始…</h3>
+        
+          <a class="article-more-a" href="/2016/01/28/2016-01-28-left-gulp-grunt-for-npm/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端工程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/28/2016-01-28-left-gulp-grunt-for-npm/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-2016-01-27-chrome-highlighter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -266,6 +330,75 @@
 
 
   
+    <article id="post-2015-08-15-cors跨域options请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/11/2015-08-15-cors跨域options请求/">CORS  options请求</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/11/2015-08-15-cors跨域options请求/" class="archive-article-date">
+  	<time datetime="2015-11-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;终于找到时间（不偷懒）来填三个星期前挖的坑了，虽然不是什么干货，但是通过写写文章，也可以增强自己的语言组织能力，这点对程序员后面的发展也是至关重要的。切入正题，这次记录以下我用cors跨域时失败的问题（不涉及cookie跨域）。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;前两周和一个后端在集成接口，因为前端代码在我本地，后端接口在他机子上，所以让他设置cors让我可以跨域访问。然而，结果却老是得到一个404请求，查看请求信息发现是发了一个options请求，而本来的请求都没有发出去。我当时就纳闷了，自己之前用nodejs试过后端Access-Control-Allow-Origin就行啦，为何这次就不行。然后试着用原生的ajax请求和jquery请求都可以哇。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;google了些许时间后才发现问题，我前端使用angualr写的，其他人的认证模块在请求里插入了自定义的头域，而这是cors请求出现options预请求的其中一种情况，当出现以下一种情况就会发出预请求（其他情况和正常请求一样）：</p>
+<ul>
+<li>请求以 GET, HEAD 或者 POST 以外的方法发起请求。或者，使用 POST，但请求数据为 application/x-www-form-urlencoded, multipart/form-data 或者 text/plain 以外的数据类型。比如说，用 POST 发送数据类型为 application/xml 或者 text/xml 的 XML 数据的请求。</li>
+<li>使用自定义请求头（比如添加诸如 X-PINGOTHER）。</li>
+</ul>
+<pre><code>提示：从Gecko 2.0开始，text/plain, application/x-www-form-urlencoded 和 multipart/form-data 类型的数据都可以直接用于跨站请求，而不需要先发起“预请求”了。之前，只有 text/plain 可以不用先发起“预请求”，进行跨站请求。
+</code></pre>
+        
+          <a class="article-more-a" href="/2015/11/11/2015-08-15-cors跨域options请求/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">网络与协议</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/11/2015-08-15-cors跨域options请求/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-2015-11-11-html渲染奥秘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -327,75 +460,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/11/2015-11-11-html渲染奥秘/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2015-08-15-cors跨域options请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/11/2015-08-15-cors跨域options请求/">CORS  options请求</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/11/2015-08-15-cors跨域options请求/" class="archive-article-date">
-  	<time datetime="2015-11-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;终于找到时间（不偷懒）来填三个星期前挖的坑了，虽然不是什么干货，但是通过写写文章，也可以增强自己的语言组织能力，这点对程序员后面的发展也是至关重要的。切入正题，这次记录以下我用cors跨域时失败的问题（不涉及cookie跨域）。</p>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;前两周和一个后端在集成接口，因为前端代码在我本地，后端接口在他机子上，所以让他设置cors让我可以跨域访问。然而，结果却老是得到一个404请求，查看请求信息发现是发了一个options请求，而本来的请求都没有发出去。我当时就纳闷了，自己之前用nodejs试过后端Access-Control-Allow-Origin就行啦，为何这次就不行。然后试着用原生的ajax请求和jquery请求都可以哇。</p>
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;google了些许时间后才发现问题，我前端使用angualr写的，其他人的认证模块在请求里插入了自定义的头域，而这是cors请求出现options预请求的其中一种情况，当出现以下一种情况就会发出预请求（其他情况和正常请求一样）：</p>
-<ul>
-<li>请求以 GET, HEAD 或者 POST 以外的方法发起请求。或者，使用 POST，但请求数据为 application/x-www-form-urlencoded, multipart/form-data 或者 text/plain 以外的数据类型。比如说，用 POST 发送数据类型为 application/xml 或者 text/xml 的 XML 数据的请求。</li>
-<li>使用自定义请求头（比如添加诸如 X-PINGOTHER）。</li>
-</ul>
-<pre><code>提示：从Gecko 2.0开始，text/plain, application/x-www-form-urlencoded 和 multipart/form-data 类型的数据都可以直接用于跨站请求，而不需要先发起“预请求”了。之前，只有 text/plain 可以不用先发起“预请求”，进行跨站请求。
-</code></pre>
-        
-          <a class="article-more-a" href="/2015/11/11/2015-08-15-cors跨域options请求/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">网络与协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/11/2015-08-15-cors跨域options请求/">展开全文 >></a>
         </p>
       
 
@@ -612,7 +676,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 plusice
+    		&copy; 2018 plusice
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -691,11 +755,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">网络与协议</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -711,6 +775,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">后端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
@@ -720,14 +792,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">后端</a>
               </li>
             
             <div class="clearfix"></div>
