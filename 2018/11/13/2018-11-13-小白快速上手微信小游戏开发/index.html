@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/6 | plusice</title>
+  <title>小白快速上手微信小游戏开发 | plusice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="plusice">
-<meta property="og:url" content="http://yoursite.com/archives/2017/06/index.html">
+  <meta name="description" content="最近工作清闲，利用业余时间做了一个微信小游戏，目前正在申请软著登记阶段（mmp的天朝政策）。过程中做了一些笔记，在这里记录下来，当作一个小白的快速上手介绍，对已经有经验的不具备参考价值。我是使用Cocos Creator开发的，本文内容将分成两部分，一部分是对Cocos Creator做一个重要概念的介绍，另一部分是列出微信小游戏开发的一些注意点。 Cocos Creator Cocos Crea">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小白快速上手微信小游戏开发">
+<meta property="og:url" content="http://yoursite.com/2018/11/13/2018-11-13-小白快速上手微信小游戏开发/index.html">
 <meta property="og:site_name" content="plusice">
+<meta property="og:description" content="最近工作清闲，利用业余时间做了一个微信小游戏，目前正在申请软著登记阶段（mmp的天朝政策）。过程中做了一些笔记，在这里记录下来，当作一个小白的快速上手介绍，对已经有经验的不具备参考价值。我是使用Cocos Creator开发的，本文内容将分成两部分，一部分是对Cocos Creator做一个重要概念的介绍，另一部分是列出微信小游戏开发的一些注意点。 Cocos Creator Cocos Crea">
+<meta property="og:image" content="http://yoursite.com/images/cocos.jpg">
+<meta property="og:updated_time" content="2018-11-14T09:30:15.745Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="plusice">
+<meta name="twitter:title" content="小白快速上手微信小游戏开发">
+<meta name="twitter:description" content="最近工作清闲，利用业余时间做了一个微信小游戏，目前正在申请软著登记阶段（mmp的天朝政策）。过程中做了一些笔记，在这里记录下来，当作一个小白的快速上手介绍，对已经有经验的不具备参考价值。我是使用Cocos Creator开发的，本文内容将分成两部分，一部分是对Cocos Creator做一个重要概念的介绍，另一部分是列出微信小游戏开发的一些注意点。 Cocos Creator Cocos Crea">
+<meta name="twitter:image" content="http://yoursite.com/images/cocos.jpg">
   
     <link rel="alternative" href="/atom.xml" title="plusice" type="application/atom+xml">
   
@@ -133,174 +140,180 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2018-11-13-小白快速上手微信小游戏开发" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      小白快速上手微信小游戏开发
+    </h1>
+  
+
+        
+        <a href="/2018/11/13/2018-11-13-小白快速上手微信小游戏开发/" class="archive-article-date">
+  	<time datetime="2018-11-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-13</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近工作清闲，利用业余时间做了一个微信小游戏，目前正在申请软著登记阶段（mmp的天朝政策）。过程中做了一些笔记，在这里记录下来，当作一个小白的快速上手介绍，对已经有经验的不具备参考价值。我是使用Cocos Creator开发的，本文内容将分成两部分，一部分是对Cocos Creator做一个重要概念的介绍，另一部分是列出微信小游戏开发的一些注意点。</p>
+<h3 id="Cocos-Creator"><a href="#Cocos-Creator" class="headerlink" title="Cocos Creator"></a>Cocos Creator</h3><blockquote>
+<p>Cocos Creator是一个完整的游戏开发解决方案，包括了 cocos2d-x 引擎的 JavaScript 实现（不需要学习一个新的引擎），以及能让你更快速开发游戏所需要的各种图形界面工具。完全为引擎定制打造，包含从设计、开发、预览、调试到发布的整个工作流所需的全功能一体化编辑器。目前支持发布游戏到 Web、iOS、Android、各类”小游戏”、PC 客户端等平台，真正实现一次开发，全平台运行。</p>
+</blockquote>
+<p>——<a href="https://docs.cocos.com/creator/manual/zh/" target="_blank" rel="external">Cocos Creator 用户手册</a></p>
+<p>先下载一个Cocos Creator，再继续下面的内容。</p>
+<p><img src="/images/cocos.jpg" alt=""></p>
+<h4 id="资源管理器"><a href="#资源管理器" class="headerlink" title="资源管理器"></a>资源管理器</h4><p>资源管理器中存放图片、脚本、音频、场景（scene）等内容，场景对应的是一个canvas，每个场景有一个层级管理器管理场景下的节点，canvas是根节点。</p>
+<h4 id="层级管理器"><a href="#层级管理器" class="headerlink" title="层级管理器"></a>层级管理器</h4><p>层级管理器包含场景（canvas）中的每个节点，每个节点可以添加不同的组件，每个组件在属性检查器中有各自对应的属性设置。Cocos Creator就是通过组件的方式给节点添加功能的，如果直接把一个图片从资源管理器拖动到层级管理器，那么默认会创建一个带sprite组件的节点，Sprite（精灵）是 2D 游戏中最常见的显示图像的方式。</p>
+<h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><ul>
+<li>组件通过挂载在节点上面给节点添加各种功能，例如碰撞组件给节点添加碰撞功能、刚体组件给节点添加力和速度等物理功能。</li>
+<li>脚本组件是一个特殊的组件，你可以从资源管理器中选择某个脚本给节点添加脚本组件，脚本中要定义好一个Component类，在类方法中用this.node可以访问到对应的节点，从而对它做位移等操作。Component类有一个update方法，它会在每帧执行，一般会在这里改变节点位置渲染动画。</li>
+<li>脚本组件中类定义的属性可以在属性检查器中编辑，属性的值可以是一个节点或者资源，你可以在层级管理器中把某个节点拖到属性检查器中脚本组件的某个属性，这样脚本里面可以直接访问到这个节点。属性也可以是某个节点的某个组件，这个取决于你在类定义里面指定了什么类型，例如指定了属性是cc.Label，那么把节点拖过去后，属性是节点的Label组件。</li>
+<li>脚本组件中要访问其他的组件，需要通过节点的getComponent方法，用组件类作为参数访问到组件。例如要给一个刚体组件添加速度需要访问到刚体组件（设置速度后可以让节点运动），可以这样：this.node.getComponent(cc.RigidBody)。</li>
+</ul>
+<h4 id="碰撞系统"><a href="#碰撞系统" class="headerlink" title="碰撞系统"></a>碰撞系统</h4><ul>
+<li>Cocos Creator 内置了一个简单易用的碰撞检测系统，支持 圆形，矩形 以及 多边形 相互间的碰撞检测。这里只是检测，两个节点碰撞还是会重叠，并不会弹开。</li>
+<li>只要为节点添加碰撞组件，启动碰撞检测，并且在碰撞组件对应节点的脚本组件中添加碰撞回调，改变两个节点位置到相互碰撞就可以触发回调函数，获取到碰撞信息。</li>
+<li>碰撞组件可以进行分组，分组规定了哪些分组的碰撞组件之间可以产生碰撞。</li>
+</ul>
+<h4 id="物理系统"><a href="#物理系统" class="headerlink" title="物理系统"></a>物理系统</h4><ul>
+<li>开启物理系统，设置重力，并且设置物理碰撞组件，节点会在场景中受重力改变位置，并且不同节点相互碰撞不会重叠（刚体），两个动态节点碰撞会相互影响速度，一个动态节点碰撞静态节点，则只有动态节点速度受影响。</li>
+<li>这里节点的移动，可以是直接改变节点的坐标位置，也可以是在物理系统中改变节点的速度。</li>
+<li>物理系统的碰撞检测触发的回调和单纯碰撞系统的回调函数是不一样的。</li>
+</ul>
+<p>可能这么说还是有些抽象，可以结合<a href="https://docs.cocos.com/creator/manual/zh/getting-started/quick-start.html" target="_blank" rel="external">官网的例子</a>写一个小demo出来，这样大概就能掌握基础的用法了。</p>
+<p>使用Cocos Creator可以方便的把游戏打包成微信小游戏，一款小游戏就这样完成了，但是微信小游戏有一些点需要注意。</p>
+<h3 id="微信小游戏"><a href="#微信小游戏" class="headerlink" title="微信小游戏"></a>微信小游戏</h3><h4 id="appid"><a href="#appid" class="headerlink" title="appid"></a>appid</h4><ul>
+<li>测试不能用小程序类的appid，要用小游戏类的appid，官网提供一个固定的测试id可以用来测试：wx6ac3f5090a6b99c5</li>
+<li>用上面的固定测试appid构建的游戏不能调用分享等微信接口</li>
+</ul>
+<h4 id="开放数据域"><a href="#开放数据域" class="headerlink" title="开放数据域"></a>开放数据域</h4><p>很多小游戏应该都要用到排行榜功能，这个通过开放数据域就可以实现。</p>
+<p>微信小游戏为了保护其社交关系链数据，增加了开放数据域的概念，这是一个单独的游戏执行环境。开放数据域中的资源、引擎、程序，都和主游戏完全隔离，开发者只有在开放数据域中才能访问微信提供的 wx.getFriendCloudStorage() 等API获取其他用户数据，用于实现一些例如排行榜的功能。主域可以向开放数据域发送消息，反过来则不行。由于开放数据域只能在离屏画布sharedCanvas上渲染，因此需要我们把 sharedCanvas绘制到主域上。</p>
+<p>由于开放数据域是一个封闭、独立的JavaScript作用域，所以开发者需要创建两个项目，主域项目工程是正常游戏项目，开放数据域项目工程通过微信API获取用户数据来做排行榜。</p>
+<p>使用cocos creator时，在开放数据域项目工程中，独立通过开放数据域打包流程打包，放到主域代码目录下，就可以作为完整的微信工程在模拟器和真机上进行预览调试了。Cocos Creator提供了一个WXSubContextView组件，可以自动渲染sharedCanvas。</p>
+<p>以上就是全部的内容，很多其实是从Cocos Creator文档上摘的，不得不说文档写得非常详细，这里<a href="https://docs.cocos.com/creator/manual/zh/" target="_blank" rel="external">附上链接</a>。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/20/linux笔记4/" class="archive-article-date">
-  	<time datetime="2017-06-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/20/linux笔记4/">小前端的linux私房菜读书笔记（四）——一些常用命令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/11/13/2018-11-13-小白快速上手微信小游戏开发/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/11/linux笔记3/" class="archive-article-date">
-  	<time datetime="2017-06-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/11/linux笔记3/">小前端的linux私房菜读书笔记（三）——bash的使用</a>
-    </h1>
+  
+    <a href="/2018/09/29/2018-08-28-JavaScript栈内存空间/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript栈内存空间，限制了递归次数的元凶</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/10/linux笔记2/" class="archive-article-date">
-  	<time datetime="2017-06-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/10/linux笔记2/">小前端的linux私房菜读书笔记（二）——Linux常见文件操作与文件系统</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/04/linux笔记1/" class="archive-article-date">
-  	<time datetime="2017-06-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/04/linux笔记1/">小前端的linux私房菜读书笔记（一）——磁盘分区和文件权限</a>
-    </h1>
-  
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'plusice'; // required: replace example with your forum shortname
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -323,8 +336,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
